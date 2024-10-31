@@ -1,0 +1,57 @@
+body{
+    background-image: url("baldiiei.webp");
+    
+}
+
+
+.quadro{
+    width:600px;
+    height: 350px;
+    float: left;
+    margin-top: 100px;
+    color: blue;
+   background-image: url("https://i0.wp.com/papelariacanaa.com/wp-content/uploads/2020/05/QN.jpg?fit=400%2C233&ssl=1");
+   background-size: contain;
+
+}
+
+
+.botao{
+   
+    font-family: "Comic Neue", cursive;
+    font-weight: 300;
+    font-style: normal;
+    
+      background-color: blanchedalmond;
+
+    text-decoration: none;
+    display: block;
+    padding-top: 7%;
+    margin-left: 30%;
+    color: rgb(225, 225, 236);
+    border: none;
+
+    font-size: 100px;
+    background:none;
+    width: 300px;
+    height: 200px;
+
+    
+}
+.diminerd{
+    display: block;
+    float: left;
+   margin-top: 35px;
+   
+}
+.gay{
+    font-family: "Comic Neue", cursive;
+    font-weight: 300;
+    font-style: normal;
+    color: aliceblue;
+    display:block;
+    padding-left: 26%;
+    font-size: xx-large;
+    margin-top: 5%;
+
+}

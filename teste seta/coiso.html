@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quadrado Móvel</title>
+    <div id="square"><img src="./dimitri.png" width="70px" alt=""></div>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            height: 100%;
+            width: 100%;
+            background-image: url(https://edirlei.com/3dgamebuilder/pt/3dgamebuilder/images/grass.jpg);
+            background-color: #937d7d;
+        }
+        #square {
+            position: absolute;
+            width: 70px; /* largura do quadrado */
+            height: 70px; /* altura do quadrado */ 
+            /* cor do quadrado */
+            top: 50%; /* posição inicial */
+            left: 50%; /* posição inicial */
+            transform: translate(-50%, -50%); /* centraliza o quadrado */
+        }
+    </style>
+</head>
+<body>
+
+
+
+<script>
+    const square = document.getElementById('square');
+    let posX = window.innerWidth / 50 - 25; // posição inicial
+    let posY = window.innerHeight / 50 - 25; // posição inicial
+    const step =6 ; // quantidade de movimento
+
+    // Atualiza a posição inicial do quadrado
+    square.style.transform = `translate(${posX}px, ${posY}px)`;
+
+    window.addEventListener('keydown', (e) => {
+        switch (e.key) {
+            case 'w':
+                posY = Math.max(posY - step, 0); // limite superior
+                break;
+            case 's':
+                posY = Math.min(posY + step, window.innerHeight - square.clientHeight); // limite inferior
+                break;
+            case 'a':
+                posX = Math.max(posX - step, 0); // limite esquerdo
+                break;
+            case 'd':
+                posX = Math.min(posX + step, window.innerWidth - square.clientWidth); // limite direito
+                break;
+        }
+        // Atualiza a posição do quadrado
+        square.style.transform = `translate(${posX}px, ${posY}px)`;
+    });
+</script>
+
+</body>
+</html>

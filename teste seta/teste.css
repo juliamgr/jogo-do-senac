@@ -1,0 +1,25 @@
+body{
+    background-image: url("https://png.pngtree.com/thumb_back/fw800/background/20231104/pngtree-background-texture-of-gypsum-board-image_13793884.png" );
+    
+            
+        margin: 1px ;
+        overflow: hidden;
+        background-size: cover;
+        
+        
+        background-color: #937d7d;
+}
+
+
+
+
+#square {
+    position: absolute;
+    color: red;
+    width: 70px; /* largura do quadrado */
+    height: 70px; /* altura do quadrado */ 
+    /* cor do quadrado */
+    top: 50%; /* posição inicial */
+    left: 50%; /* posição inicial */
+    transform: translate(-50%, -50%); /* centraliza o quadrado */
+    }

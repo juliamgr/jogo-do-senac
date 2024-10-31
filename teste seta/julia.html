@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quadrado Móvel</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-size: cover;
+            background-image: url(farrapos.png);
+            background-color: #937d7d;
+        }
+        #square {
+            position: absolute;
+            width: 70px; /* largura do quadrado */
+            height: 70px; /* altura do quadrado */
+            top: 50%; /* posição inicial */
+            left: 50%; /* posição inicial */
+            transform: translate(-50%, -50%); /* centraliza o quadrado */
+        }
+        #collisionBlock {
+            position: absolute;
+            width: 100px; /* largura do bloco de colisão */
+            height: 100px; /* altura do bloco de colisão */
+            background-color: red; /* cor do bloco de colisão */
+            top: 300px; /* posição do bloco de colisão */
+            left: 300px; /* posição do bloco de colisão */
+        }
+    </style>
+</head>
+<body>
+    <div id="square"><img src="./dimitri.png" width="70px" alt=""></div>
+    <div id="collisionBlock"></div>
+
+    <script>
+        const square = document.getElementById('square');
+        const collisionBlock = document.getElementById('collisionBlock');
+        let posX = window.innerWidth / 2; // posição inicial
+        let posY = window.innerHeight / 2; // posição inicial
+        const step = 7; // quantidade de movimento
+
+        // Atualiza a posição inicial do quadrado
+        square.style.transform = `translate(${posX}px, ${posY}px)`;
+
+        window.addEventListener('keydown', (e) => {
+            const newPosX = posX;
+            const newPosY = posY;
+
+            switch (e.key) {
+                case 'w':
+                    posY = Math.max(posY - step, 0); // limite superior
+                    break;
+                case 's':
+                    posY = Math.min(posY + step, window.innerHeight - square.clientHeight); // limite inferior
+                    break;
+                case 'a':
+                    posX = Math.max(posX - step, 0); // limite esquerdo
+                    break;
+                case 'd':
+                    posX = Math.min(posX + step, window.innerWidth - square.clientWidth); // limite direito
+                    break;
+            }
+
+            // Verifica colisão com o bloco de colisão
+            if (!checkCollision(posX, posY)) {
+                // Atualiza a posição do quadrado apenas se não houver colisão
+                square.style.transform = `translate(${posX}px, ${posY}px)`;
+            } else {
+                // Reverte a posição se houver colisão
+                posX = newPosX;
+                posY = newPosY;
+            }
+        });
+
+        function checkCollision(newX, newY) {
+            const squareRect = {
+                left: newX,
+                right: newX + square.clientWidth,
+                top: newY,
+                bottom: newY + square.clientHeight,
+            };
+
+            const blockRect = {
+                left: collisionBlock.offsetLeft,
+                right: collisionBlock.offsetLeft + collisionBlock.clientWidth,
+                top: collisionBlock.offsetTop,
+                bottom: collisionBlock.offsetTop + collisionBlock.clientHeight,
+            };
+
+            return !(squareRect.right < blockRect.left ||
+                     squareRect.left > blockRect.right ||
+                     squareRect.bottom < blockRect.top ||
+                     squareRect.top > blockRect.bottom);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo Top-Down com Canvas</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden; /* Evita barras de rolagem */
+        }
+        canvas {
+            border: 2px solid black;
+            background-color: lightgrey;
+        }
+
+    </style>
+</head>
+<body>
+
+<canvas id="gameCanvas" width="800" height="600"></canvas>
+
+<script>
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    player.image.src = ''; // Caminho da imagem local
+
+    const player = {
+        
+        x: 100,
+        y: 100,
+        width: 40,
+        height: 40,
+        speed: 5,
+        color: 'red',
+    
+    };
+    player.image.src = 'player.png'; // Caminho da imagem local
+    player.image.onload = function() {
+    update(); // Atualiza após a imagem ser carregada
+};
+
+
+    const collisionArea = {
+        x: 200,
+        y: 150,
+        width: 400,
+        height: 300,
+        color: 'lightblue',
+    };
+
+    // Função para desenhar o jogador
+    function drawPlayer() {
+        ctx.fillStyle = player.color;
+        ctx.fillRect(player.x, player.y, player.width, player.height);
+    }
+
+    // Função para desenhar a área de colisão
+    function drawCollisionArea() {
+        ctx.fillStyle = collisionArea.color;
+        ctx.fillRect(collisionArea.x, collisionArea.y, collisionArea.width, collisionArea.height);
+    }
+
+    // Função para atualizar a posição do jogador
+    function update() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height); // Limpa o canvas
+        drawCollisionArea(); // Desenha a área de colisão
+        drawPlayer(); // Desenha o jogador
+
+        // Verifica colisão com a área de colisão
+        if (player.x < collisionArea.x) player.x = collisionArea.x;
+        if (player.x + player.width > collisionArea.x + collisionArea.width) 
+            player.x = collisionArea.x + collisionArea.width - player.width;
+        if (player.y < collisionArea.y) player.y = collisionArea.y;
+        if (player.y + player.height > collisionArea.y + collisionArea.height) 
+            player.y = collisionArea.y + collisionArea.height - player.height;
+    }
+
+    // Evento de teclado para mover o jogador
+    document.addEventListener('keydown', (event) => {
+        switch (event.key) {
+            case 'ArrowUp':
+                player.y -= player.speed;
+                break;
+            case 'ArrowDown':
+                player.y += player.speed;
+                break;
+            case 'ArrowLeft':
+                player.x -= player.speed;
+                break;
+            case 'ArrowRight':
+                player.x += player.speed;
+                break;
+        }
+        update(); // Atualiza a posição e desenha o jogador
+    });
+
+    // Inicializa o jogo
+    update();
+</script>
+
+</body>
+</html>
