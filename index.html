@@ -28,7 +28,6 @@
 <body>
 
 
-
 <script>
     const square = document.getElementById('square');
     let posX = window.innerWidth / 2 - 35; // posição inicial
@@ -56,6 +55,18 @@
         // Atualiza a posição do quadrado
         square.style.transform = `translate(${posX}px, ${posY}px)`;
     });
+
+    const obstacles = [
+            { x: 100, y: 150, width: 50, height: 50, color: "red" },
+            { x: 300, y: 400, width: 80, height: 80, color: "red" },
+            { x: 600, y: 200, width: 100, height: 100, color: "red" }
+        ];
+
+        // Limitar o jogador dentro da tela
+        if (player.x < 0) player.x = 0;
+            if (player.y < 0) player.y = 0;
+            if (player.x + player.width > canvas.width) player.x = canvas.width - player.width;
+            if (player.y + player.height > canvas.height) player.y = canvas.height - player.height;
 </script>
 
 </body>
