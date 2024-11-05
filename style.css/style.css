@@ -4,10 +4,20 @@
     box-sizing: border-box;
 }
 
-.game-board{
-    width: 80%;
-    height: 500px;
-    border: 1px solid #333;
-    margin: 0 auto;
+body {
+    margin: 1px;
+    overflow: hidden;
+    background-image: url(./img/sala2euacho.png);
+    background-color: #937d7d;
 }
+
+#square {
+    position: absolute;
+    width: 70px; /* largura do quadrado */
+    height: 70px; /* altura do quadrado */ 
+    top: 50%; /* posição inicial */
+    left: 50%; /* posição inicial */
+    transform: translate(-50%, -50%); /* centraliza o quadrado */
+}
+
 
