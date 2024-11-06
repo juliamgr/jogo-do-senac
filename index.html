@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quadrado Móvel</title>
     <div id="square">
-        <img src="https://static.wikia.nocookie.net/baldi-in-education-and-learning/images/d/dd/Baldi_bravo.jpg/revision/latest?cb=20201004234521&path-prefix=pt-br" width="70px" alt="">
+        
     </div>
     <style>
         body {
@@ -21,6 +21,7 @@
             top: 50%; /* posição inicial */
             left: 50%; /* posição inicial */
             transform: translate(-50%, -50%); /* centraliza o quadrado */
+            background-color: aquamarine;
         }
     </style>
     
@@ -39,15 +40,19 @@
         window.addEventListener('keydown', (e) => {
             switch (e.key) {
                 case 'w':
-                    posY = Math.max(posY - step, -266); // limite superior
+                case 'W':
+                    posY = Math.max(posY - step, -251); // limite superior
                     break;
                 case 's':
+                case 'S':
                     posY = Math.min(posY + step, window.innerHeight - square.clientHeight, 131); // limite inferior
                     break;
                 case 'a':
-                    posX = Math.max(posX - step, 68); // limite esquerdo
+                case 'A':
+                    posX = Math.max(posX - step, 63); // limite esquerdo
                     break;
                 case 'd':
+                case 'D':
                     posX = Math.min(posX + step, window.innerWidth - square.clientWidth); // limite direito
                     break;
             }
@@ -56,24 +61,9 @@
             square.style.left = `${posX}px`;
         });
 
-        window.addEventListener('keydown', (e) => {
-            switch (e.key) {
-                case 'W':
-                    posY = Math.max(posY - step, -301); // limite superior
-                    break;
-                case 'S':
-                    posY = Math.min(posY + step, window.innerHeight - square.clientHeight); // limite inferior
-                    break;
-                case 'A':
-                    posX = Math.max(posX - step, 100); // limite esquerdo
-                    break;
-                case 'D':
-                    posX = Math.min(posX + step, window.innerWidth - square.clientWidth); // limite direito
-                    break;
-            }
+        
             // Atualiza a posição do quadrado
             square.style.transform = `translate(${posX}px, ${posY}px)`;
-        });
     
         const obstacles = [
             { x: 100, y: 150, width: 50, height: 50, color: "red" },
