@@ -98,7 +98,7 @@
         // Verifica se nenhuma das teclas está pressionada
         if (!Object.values(movingKeys).includes(true)) {
             gifAtivo = false;
-            squareGif.src = '';  // Deixa o GIF parado (imagem estática ou transparente)
+            squareGif.src = './dimi chutando.gif';  // Deixa o GIF parado (imagem estática ou transparente)
         }
     }
 });
@@ -108,7 +108,7 @@ function update() {
     // Se o GIF não estiver ativo, pare a animação
     if (!gifAtivo) {
         // Coloque uma imagem estática ou qualquer coisa para representar o GIF parado
-        squareGif.src = './imagem_estatica.png'; // Substitua com a imagem que deseja mostrar quando o GIF não estiver em movimento
+        squareGif.src = './didmitrinho.png'; // Substitua com a imagem que deseja mostrar quando o GIF não estiver em movimento
     }
     requestAnimationFrame(update);  // Continue o loop de atualização
 }
