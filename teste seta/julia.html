@@ -4,19 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quadrado Móvel</title>
-    <div id="square">
-        <img id="square-gif" src="./didmitrinho (1).gif" width="150px" alt="">
-        
-    </div>
-    
-    <canvas id="Canva" width="800" height="600"></canvas>
-
     <style>
         body {
-            margin: 1px;
+            margin: 0;
+            padding: 0;
             overflow: hidden;
-            background-size: cover;
             background-color: #937d7d;
+        }
+
+        canvas {
+            display: block;
+            background-color: #2c3e50; /* Cor do fundo do canvas */
         }
 
         #square {
@@ -36,90 +34,95 @@
 </head>
 <body>
 
+<canvas id="Canva" width="800" height="600"></canvas>
+<div id="square">
+    <img id="square-gif" src="./dimiparado.png" width="70" alt="Personagem">
+</div>
+
 <script>
+    const canvas = document.getElementById('Canva');
     const square = document.getElementById('square');
     const squareGif = document.getElementById('square-gif');
-    let posX = window.innerWidth / 2 - 35; // Posição inicial X (centralizado)
-    let posY = window.innerHeight / 2 - 35; // Posição inicial Y (centralizado)
-    const step = 13; // Quantidade de movimento
+    const ctx = canvas.getContext('2d');
 
-    // Atualiza a posição inicial do quadrado
-    square.style.transform = `translate(${posX}px, ${posY}px)`;
+    let posX = canvas.width / 2 - 35; // Centralizado na largura
+    let posY = canvas.height / 2 - 35; // Centralizado na altura
+    const step = 10; // Quantidade de movimento em pixels
+    const width = square.offsetWidth;  // Largura do quadrado
+    const height = square.offsetHeight; // Altura do quadrado
+    let gifAtivo = false; // Controle para saber se o gif está animado ou não
 
-    // Variável de controle para saber se o GIF está ativo
-    let gifAtivo = false;
+    // Variável de controle das teclas pressionadas
+    let movingKeys = {
+        w: false,
+        a: false,
+        s: false,
+        d: false
+    };
 
-    // Função que será chamada quando uma tecla for pressionada
-    window.addEventListener('keydown', (e) => {
-        switch (e.key) {
-            case 'w': // Quando pressionar a tecla 'W', o GIF começa a animar
-            posY = Math.max(posY - step, ); // limite superior
-               
-                squareGif.src = './didmitrinho (1).gif'; // Coloca o GIF animado
-                gifAtivo = true; // Define que o GIF está ativo
-                break;
-            case 's': // Quando pressionar a tecla 'S', move para baixo
-                posY = Math.min(posY + step, window.innerHeight - square.clientHeight);
-                
-                squareGif.src = './didmitrinho (1).gif'; // Coloca o GIF animado
-                gifAtivo = true; // Define que o GIF está ativo
-                break;
-            case 'a': // Quando pressionar a tecla 'A', move para a esquerda e gira o GIF
-                posX = Math.max(posX - step, 0);
-                square.style.transform = `translate(${posX}px, ${posY}px) rotateY(180deg)`; // Rotaciona para a esquerda
-                squareGif.src = './dimi chutando.gif'; // Muda para o GIF de "dimichutando"
-                break;
-            case 'd': // Quando pressionar a tecla 'D', move para a direita e gira o GIF
-                posX = Math.min(posX + step, window.innerWidth - square.clientWidth);
-                square.style.transform = `translate(${posX}px, ${posY}px) rotateY(0deg)`; // Rotaciona para a direita
-                squareGif.src = './dimi chutando.gif'; // Muda para o GIF de "dimichutando"
-                break;
+    // Função para atualizar a posição do personagem e o gif
+    function moverPersonagem() {
+        // Verifica se as teclas estão pressionadas e move o personagem
+        if (movingKeys.w) {
+            posY = Math.max(posY - step, 0); // Limita o movimento para cima
+            gifAtivo = true; // Ativa o gif animado
+            squareGif.src = './didmitrinho (1).gif'; // Gif animado
+        }
+        if (movingKeys.s) {
+            posY = Math.min(posY + step, canvas.height - height); // Limita o movimento para baixo
+            gifAtivo = true;
+            squareGif.src = './didmitrinho (1).gif'; // Gif animado
+        }
+        if (movingKeys.a) {
+            posX = Math.max(posX - step, 0); // Limita o movimento para a esquerda
+            squareGif.src = './dimi esq.gif'; // Gif animado para esquerda
+            square.style.transform = `translate(${posX}px, ${posY}px) rotateY(180deg)`; // Rotaciona para esquerda
+            gifAtivo = true;
+        }
+        if (movingKeys.d) {
+            posX = Math.min(posX + step, canvas.width - width); // Limita o movimento para a direita
+            squareGif.src = './dimi dir.gif'; // Gif animado para direita
+            square.style.transform = `translate(${posX}px, ${posY}px) rotateY(0deg)`; // Rotaciona para direita
+            gifAtivo = true;
         }
 
-        // Atualiza a posição do quadrado
-        square.style.transform = `translate(${posX}px, ${posY}px)`; // Atualiza a posição com rotação
+        // Atualiza a posição do quadrado no canvas
+        square.style.transform = `translate(${posX}px, ${posY}px)`; // Atualiza a posição do quadrado com rotação
+    }
+
+    // Detecta quando uma tecla é pressionada
+    window.addEventListener('keydown', (e) => {
+        if (['w', 'a', 's', 'd'].includes(e.key)) {
+            movingKeys[e.key] = true;
+            moverPersonagem();
+        }
     });
 
-    // Função que será chamada quando uma tecla for liberada
+    // Detecta quando uma tecla é liberada
     window.addEventListener('keyup', (e) => {
-        if (e.key === 'w' || e.key === 'W') {
-            // Quando a tecla 'W' for liberada, o GIF para de animar (volta para o estado estático)
-            squareGif.src = './didmitrinho (1).gif'; // Coloca o GIF animado
-            gifAtivo = false; // Define que o GIF não está mais ativo
-
-
-
-
+        if (['w', 'a', 's', 'd'].includes(e.key)) {
+            movingKeys[e.key] = false;
         }
-    });window.addEventListener('keyup', (e) => {
-    if (['w', 'a', 's', 'd'].includes(e.key)) {
-        movingKeys[e.key] = false;
         
-        // Verifica se nenhuma das teclas está pressionada
+        // Se nenhuma tecla de movimento for pressionada, o gif será parado
         if (!Object.values(movingKeys).includes(true)) {
             gifAtivo = false;
-            squareGif.src = './dimi chutando.gif';  // Deixa o GIF parado (imagem estática ou transparente)
+            squareGif.src = './dimiparado.png'; // Coloca a imagem estática quando o gif não está em movimento
         }
-    }
-});
+    });
 
-// A cada quadro (opcional, para garantir que o GIF pare de se mover se não estiver pressionado)
-function update() {
-    // Se o GIF não estiver ativo, pare a animação
-    if (!gifAtivo) {
-        // Coloque uma imagem estática ou qualquer coisa para representar o GIF parado
-        squareGif.src = './didmitrinho.png'; // Substitua com a imagem que deseja mostrar quando o GIF não estiver em movimento
+    // Função para desenhar o canvas (opcional, você pode adicionar outras coisas no canvas)
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height); // Limpa o canvas
+        // Desenha o personagem no canvas (apenas exemplo, não será necessário com o div "square" controlando a posição)
+        // ctx.fillRect(posX, posY, 70, 70); // Desenha o quadrado (personagem)
+        requestAnimationFrame(draw); // Redesenha o canvas
     }
-    requestAnimationFrame(update);  // Continue o loop de atualização
-}
 
-// Inicia o loop de atualização
-update();   
+    // Inicia o desenho contínuo (opcional, se quiser adicionar outras coisas no canvas)
+    draw();
 
 </script>
 
 </body>
 </html>
-
-
-
