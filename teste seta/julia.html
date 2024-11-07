@@ -8,7 +8,6 @@
         <img id="square-gif" src="./didmitrinho (1).gif" width="150px" alt="">
         
     </div>
-    <div id="gif"> <img src="dimi chutando.gif" alt=""></div>
     
     <canvas id="Canva" width="800" height="600"></canvas>
 
@@ -61,16 +60,19 @@
                 break;
             case 's': // Quando pressionar a tecla 'S', move para baixo
                 posY = Math.min(posY + step, window.innerHeight - square.clientHeight);
+                
+                squareGif.src = './didmitrinho (1).gif'; // Coloca o GIF animado
+                gifAtivo = true; // Define que o GIF está ativo
                 break;
             case 'a': // Quando pressionar a tecla 'A', move para a esquerda e gira o GIF
                 posX = Math.max(posX - step, 0);
                 square.style.transform = `translate(${posX}px, ${posY}px) rotateY(180deg)`; // Rotaciona para a esquerda
-                squareGif.src = './dimichutando.gif'; // Muda para o GIF de "dimichutando"
+                squareGif.src = './dimi chutando.gif'; // Muda para o GIF de "dimichutando"
                 break;
             case 'd': // Quando pressionar a tecla 'D', move para a direita e gira o GIF
                 posX = Math.min(posX + step, window.innerWidth - square.clientWidth);
                 square.style.transform = `translate(${posX}px, ${posY}px) rotateY(0deg)`; // Rotaciona para a direita
-                squareGif.src = './dimichutando.gif'; // Muda para o GIF de "dimichutando"
+                squareGif.src = './dimi chutando.gif'; // Muda para o GIF de "dimichutando"
                 break;
         }
 
@@ -84,8 +86,35 @@
             // Quando a tecla 'W' for liberada, o GIF para de animar (volta para o estado estático)
             squareGif.src = './didmitrinho (1).gif'; // Coloca o GIF animado
             gifAtivo = false; // Define que o GIF não está mais ativo
+
+
+
+
         }
-    });
+    });window.addEventListener('keyup', (e) => {
+    if (['w', 'a', 's', 'd'].includes(e.key)) {
+        movingKeys[e.key] = false;
+        
+        // Verifica se nenhuma das teclas está pressionada
+        if (!Object.values(movingKeys).includes(true)) {
+            gifAtivo = false;
+            squareGif.src = '';  // Deixa o GIF parado (imagem estática ou transparente)
+        }
+    }
+});
+
+// A cada quadro (opcional, para garantir que o GIF pare de se mover se não estiver pressionado)
+function update() {
+    // Se o GIF não estiver ativo, pare a animação
+    if (!gifAtivo) {
+        // Coloque uma imagem estática ou qualquer coisa para representar o GIF parado
+        squareGif.src = './imagem_estatica.png'; // Substitua com a imagem que deseja mostrar quando o GIF não estiver em movimento
+    }
+    requestAnimationFrame(update);  // Continue o loop de atualização
+}
+
+// Inicia o loop de atualização
+update();   
 
 </script>
 
