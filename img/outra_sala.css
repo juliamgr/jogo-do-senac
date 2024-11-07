@@ -1,0 +1,10 @@
+body{
+    background-image: url(./sala2euacho.png);
+}
+
+#square {
+    position: absolute;
+    width: 70px; /* largura do quadrado */
+    height: 70px; /* altura do quadrado */
+    background-color: aquamarine;
+}
