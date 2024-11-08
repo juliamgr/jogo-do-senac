@@ -95,19 +95,19 @@
         switch (e.key) {
             case 'w':
             case 'W':
-                newY = Math.max(posY - step, 0); // Tenta mover para cima
+                newY = Math.max(posY - step, -5); // Tenta mover para cima
                 break;
             case 's':
             case 'S':
-                newY = Math.min(posY + step, window.innerHeight - square.clientHeight); // Tenta mover para baixo
+                newY = Math.min(posY + step,700, window.innerHeight - square.clientHeight ); // Tenta mover para baixo
                 break;
             case 'a':
             case 'A':
-                newX = Math.max(posX - step, 0); // Tenta mover para a esquerda
+                newX = Math.max(posX - step, -5); // Tenta mover para a esquerda
                 break;
             case 'd':
             case 'D':
-                newX = Math.min(posX + step, window.innerWidth - square.clientWidth); // Tenta mover para a direita
+                newX = Math.min(posX + step, window.innerWidth - square.clientWidth, 4000); // Tenta mover para a direita
                 break;
             case 'f':
             case 'F':
