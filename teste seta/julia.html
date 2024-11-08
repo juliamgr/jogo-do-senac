@@ -19,8 +19,8 @@
 
         #square {
             position: absolute;
-            width: 70px;
-            height: 70px;
+            width: 100px;
+            height: 100px;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
@@ -34,7 +34,7 @@
 </head>
 <body>
 
-<canvas id="Canva" width="800" height="600"></canvas>
+<canvas id="Canva" width="800" height="600"></canvas> <!-- Tamanho da tela -->
 <div id="square">
     <img id="square-gif" src="./dimiparado.png" width="70" alt="Personagem">
 </div>
@@ -45,9 +45,9 @@
     const squareGif = document.getElementById('square-gif');
     const ctx = canvas.getContext('2d');
 
-    let posX = canvas.width / 2 - 35; // Centralizado na largura
-    let posY = canvas.height / 2 - 35; // Centralizado na altura
-    const step = 10; // Quantidade de movimento em pixels
+    let posX = canvas.width / 15- 100; // Posição inicial do personagem (centrado)
+    let posY = canvas.height / 15 - 100; // Posição inicial do personagem (centrado)
+    const step = 15; // Quantidade de movimento em pixels
     const width = square.offsetWidth;  // Largura do quadrado
     const height = square.offsetHeight; // Altura do quadrado
     let gifAtivo = false; // Controle para saber se o gif está animado ou não
@@ -60,34 +60,38 @@
         d: false
     };
 
+    // Definindo limites personalizados para a área de movimento
+    const maxX = canvas.width * 9;  // Limite direito aumentado (2x a largura do canvas)
+    const maxY = canvas.height * 5; // Limite inferior aumentado (2x a altura do canvas)
+
     // Função para atualizar a posição do personagem e o gif
     function moverPersonagem() {
         // Verifica se as teclas estão pressionadas e move o personagem
         if (movingKeys.w) {
-            posY = Math.max(posY - step, 0); // Limita o movimento para cima
-            gifAtivo = true; // Ativa o gif animado
-            squareGif.src = './didmitrinho (1).gif'; // Gif animado
+            posY = Math.max(posY - step, -220 );  // Limite superior
+            gifAtivo = true;
+            squareGif.src = './didmitrinho (1).gif'; 
         }
         if (movingKeys.s) {
-            posY = Math.min(posY + step, canvas.height - height); // Limita o movimento para baixo
+            posY = Math.min(posY + step,  maxY - height,200 );  // Limite inferior aumentado
             gifAtivo = true;
-            squareGif.src = './didmitrinho (1).gif'; // Gif animado
+            squareGif.src = './didmitrinho (1).gif'; 
         }
         if (movingKeys.a) {
-            posX = Math.max(posX - step, 0); // Limita o movimento para a esquerda
-            squareGif.src = './dimi esq.gif'; // Gif animado para esquerda
-            square.style.transform = `translate(${posX}px, ${posY}px) rotateY(180deg)`; // Rotaciona para esquerda
+            posX = Math.max(posX - step, -300);  // Limite esquerdo
+            squareGif.src = './dimi esq.gif'; 
+            square.style.transform = `translate(${posX}px, ${posY}px) rotateY(180deg)`; 
             gifAtivo = true;
         }
         if (movingKeys.d) {
-            posX = Math.min(posX + step, canvas.width - width); // Limita o movimento para a direita
-            squareGif.src = './dimi dir.gif'; // Gif animado para direita
-            square.style.transform = `translate(${posX}px, ${posY}px) rotateY(0deg)`; // Rotaciona para direita
+            posX = Math.min(posX + step, maxX - width, 500);  // Limite direito aumentado
+            squareGif.src = './dimi dir.gif'; 
+            square.style.transform = `translate(${posX}px, ${posY}px) rotateY(0deg)`; 
             gifAtivo = true;
         }
 
-        // Atualiza a posição do quadrado no canvas
-        square.style.transform = `translate(${posX}px, ${posY}px)`; // Atualiza a posição do quadrado com rotação
+        // Atualiza a posição do quadrado na tela
+        square.style.transform = `translate(${posX}px, ${posY}px)`; 
     }
 
     // Detecta quando uma tecla é pressionada
