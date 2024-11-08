@@ -25,7 +25,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
         }
-
+.game
         #square img {
             width: 100%;
             height: 100%;
@@ -34,7 +34,9 @@
 </head>
 <body>
 
-<canvas id="Canva" width="800" height="600"></canvas> <!-- Tamanho da tela -->
+<canvas id="Canva" width="100" height="100" style="background-color: red;"></canvas> <!-- Tamanho da tela -->
+
+<canvas id="gameCanvas" width="80" height="60"></canvas>
 <div id="square">
     <img id="square-gif" src="./dimiparado.png" width="70" alt="Personagem">
 </div>
@@ -68,7 +70,7 @@
     function moverPersonagem() {
         // Verifica se as teclas estão pressionadas e move o personagem
         if (movingKeys.w) {
-            posY = Math.max(posY - step, -220 );  // Limite superior
+            posY = Math.max(posY - step, -280 );  // Limite superior
             gifAtivo = true;
             squareGif.src = './didmitrinho (1).gif'; 
         }
@@ -78,7 +80,7 @@
             squareGif.src = './didmitrinho (1).gif'; 
         }
         if (movingKeys.a) {
-            posX = Math.max(posX - step, -300);  // Limite esquerdo
+            posX = Math.max(posX - step, -600);  // Limite esquerdo
             squareGif.src = './dimi esq.gif'; 
             square.style.transform = `translate(${posX}px, ${posY}px) rotateY(180deg)`; 
             gifAtivo = true;
@@ -125,6 +127,59 @@
 
     // Inicia o desenho contínuo (opcional, se quiser adicionar outras coisas no canvas)
     draw();
+
+
+
+    function drawSquare() {
+    ctx.clearRect(  canvas.width, canvas.height); // Limpar o canvas
+    ctx.drawImage(img, square.x, square.y, square.width, square.height); // Desenhar a imagem no quadrado
+}
+
+// Checar colisão com o mouse
+function checkCollision(mouseX, mouseY) {
+    if (mouseX >= square.x && mouseX <= square.x + square.width &&
+        mouseY >= square.y && mouseY <= square.y + square.height) {
+        return true; // Colidiu com o quadrado
+    }
+    return false;
+}
+
+// Função para iniciar a interação (pressionando a tecla "F")
+function startInteraction() {
+    isInteracting = !isInteracting; // Alterna o estado de interação
+    if (isInteracting) {
+        alert("Interação iniciada! Clique no quadrado.");
+    } else {
+        alert("Interação encerrada.");
+    }
+}
+
+// Evento de pressionamento de tecla (para iniciar interação com a tecla F)
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'f' || event.key === 'F') {
+        startInteraction(); // Inicia ou interrompe a interação
+    }
+});
+
+// Evento de clique do mouse para verificar colisão com o quadrado
+canvas.addEventListener('click', function(event) {
+    const mouseX = event.offsetX;
+    const mouseY = event.offsetY;
+
+    if (checkCollision(mouseX, mouseY) && isInteracting) {
+        alert("Você clicou no quadrado e iniciou uma interação!");
+    }
+});
+
+// Atualizar o canvas
+function updateCanvas() {
+    drawSquare(); // Desenha o quadrado (com a imagem)
+    requestAnimationFrame(updateCanvas); // Faz o loop de animação
+}
+
+img.onload = function() {
+    updateCanvas(); // Inicia o loop de animação quando a imagem carregar
+}
 
 </script>
 
