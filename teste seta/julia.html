@@ -3,14 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <div class="armario">
+        <IMG  class="armario2" src="armario2.avif">
+            <IMG  class="armario2" src="armario2.avif">
+                <IMG  class="armario2" src="armario2.avif">
+                    <IMG  class="armario2" src="armario2.avif">
+                        <IMG  class="armario2" src="armario2.avif">
+                            
+                        
+    </div>
+    
+        
+    </DIV>
     <title>Quadrado Móvel</title>
     <style>
         body {
             margin: 0;
             padding: 0;
             overflow: hidden;
+            background-image: url('https://i.pinimg.com/564x/20/76/73/207673d5352a495fcfb62e1b4bb81e5c.jpg');
             background-color: #937d7d;
         }
+    .armario2{
+        display: block;
+        float: left;
+        
+        height: 20%;
+        width: 18%;
+       margin-top:0%;
+    }
 
         canvas {
             display: block;
@@ -25,7 +46,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
         }
-.game
+
         #square img {
             width: 100%;
             height: 100%;
@@ -70,9 +91,9 @@
     function moverPersonagem() {
         // Verifica se as teclas estão pressionadas e move o personagem
         if (movingKeys.w) {
-            posY = Math.max(posY - step, -280 );  // Limite superior
+            posY = Math.max(posY - step, -210);  // Limite superior
             gifAtivo = true;
-            squareGif.src = './didmitrinho (1).gif'; 
+            squareGif.src = './dimi de costa (1).gif'; 
         }
         if (movingKeys.s) {
             posY = Math.min(posY + step,  maxY - height,200 );  // Limite inferior aumentado
@@ -80,7 +101,7 @@
             squareGif.src = './didmitrinho (1).gif'; 
         }
         if (movingKeys.a) {
-            posX = Math.max(posX - step, -600);  // Limite esquerdo
+            posX = Math.max(posX - step, -620);  // Limite esquerdo
             squareGif.src = './dimi esq.gif'; 
             square.style.transform = `translate(${posX}px, ${posY}px) rotateY(180deg)`; 
             gifAtivo = true;
