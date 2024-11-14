@@ -22,6 +22,7 @@
         }
         #message {
             position: absolute;
+            justify-content: center;
             display: none;
             padding: 10px;
             background-color: #333;
@@ -29,12 +30,28 @@
             border-radius: 5px;
             font-family: Arial, sans-serif;
         }
+
+        #textbox {
+    display: block;
+    padding: 70px;
+    background-color: #333;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 18px;
+    text-align: center;
+    margin-top: 480px;
+}
+
+.hidden {
+    display: none;
+}
     </style>
 </head>
 <body>
 
 <div id="square"></div>
 <div id="message">Pressione F</div>
+<div id="textbox" class="hidden">OIIII</div>
 
 <script>
     const square = document.getElementById('square');
@@ -87,6 +104,25 @@
         return false; // Não há colisão
     }
 
+    // script.js
+
+// script.js
+
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'f' || event.key === 'F') {
+        const textbox = document.getElementById('textbox');
+        
+        // Alterna a visibilidade da caixa de texto
+        if (textbox.style.display === 'none' || textbox.style.display === '') {
+            textbox.style.display = 'block';
+        } else {
+            textbox.style.display = 'none';
+        }
+    }
+});
+
+
+
     // Movimento do quadrado
     window.addEventListener('keydown', (e) => {
         let newX = posX;
@@ -113,7 +149,7 @@
             case 'F':
                 if (nearObstacle) {
                     // Redireciona para outra sala (página)
-                    window.location.replace = ("https://youtu.be/xavc1J56UMc?si=QXkQdz8YFsUG4cUU"); 
+                    window.location.replace.src='./outra_sala.html';
                 }
                 break;
         }
