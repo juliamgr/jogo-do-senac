@@ -14,7 +14,13 @@
                             
                         
     </div>
-    <div id="entrada"></div>
+    <div class="julia paia"></div>
+   
+    <div class="entrada">
+        <div class="door"></div>
+       
+    </div>
+    
 
    
     
@@ -22,19 +28,34 @@
     </DIV>
     <title>Quadrado Móvel</title>
     <style>
-        #entrada{
+            *{
+                cursor: url('png-clipart-club-penguin-island-flathead-grey-mullet-fish-dead-fish-game-animals.png'),auto;
+            }
+
+
+          
+        .entrada{
             display:block;
            
             height: 100%;
-            width: 40%;
-            background-color: BLUE;
+            width: 4%;
+            background-color: rgb(235, 235, 239);
             position: relative;
-padding-top: 30%;
+             padding-top:50%;
             margin-right: 20px;
            
         }
+        .door{
+            position: absolute;
+            width: 40px; /* Largura do quadrado */
+            height: 28%; /* Altura do quadrado */
+            background-color: rgb(32, 14, 3); /* Cor marrom */
+            top: 50%;
+            left: 65%;
+            transform: translate(-50%, -50%);
+        }
         body {
-            cursor: url();
+            
             margin: 0;
             padding: 0;
             overflow: hidden;
