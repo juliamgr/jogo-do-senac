@@ -1,168 +1,18 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interação com Obstáculos</title>
-    <style>
-        body {
-            margin: 1px;
-            overflow: hidden;
-            background-color: #937d7d;
-        }
-        #square {
-            position: absolute;
-            width: 70px; /* largura do quadrado */
-            height: 70px; /* altura do quadrado */
-            background-color: aquamarine;
-        }
-        .obstacle {
-            position: absolute;
-            background-color: red;
-        }
-        #message {
-            position: absolute;
-            justify-content: center;
-            display: none;
-            padding: 10px;
-            background-color: #333;
-            color: #fff;
-            border-radius: 5px;
-            font-family: Arial, sans-serif;
-        }
-
-        #textbox {
-    display: block;
-    padding: 70px;
-    background-color: #333;
-    color: #fff;
-    border-radius: 5px;
-    font-size: 18px;
-    text-align: center;
-    margin-top: 480px;
-}
-
-.hidden {
-    display: none;
-}
-    </style>
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css/style.css">
 </head>
 <body>
+    <div class="game-container">
+        <canvas class="game-canvas" width="352" height="198"></canvas>
+    </div>
+    
 
-<div id="square"></div>
-<div id="message">Pressione F</div>
-<div id="textbox" class="hidden">OIIII</div>
-
-<script>
-    const square = document.getElementById('square');
-    const message = document.getElementById('message');
-    let posX = window.innerWidth / 2 - 500; // posição inicial
-    let posY = window.innerHeight / 2 - 50; // posição inicial
-    const step = 20; // quantidade de movimento
-    let nearObstacle = false; // Flag para saber se está perto de um obstáculo
-
-    // Atualiza a posição inicial do quadrado
-    square.style.left = `${posX}px`;
-    square.style.top = `${posY}px`;
-
-    // Obstáculos
-    const obstacles = [
-        { x: 100, y: 150, width: 50, height: 50 },
-        { x: 300, y: 400, width: 80, height: 80 },
-        { x: 600, y: 200, width: 100, height: 100 }
-    ];
-
-    // Função para criar obstáculos na tela
-    obstacles.forEach(obstacle => {
-        const obsElement = document.createElement('div');
-        obsElement.classList.add('obstacle');
-        obsElement.style.width = `${obstacle.width}px`;
-        obsElement.style.height = `${obstacle.height}px`;
-        obsElement.style.left = `${obstacle.x}px`;
-        obsElement.style.top = `${obstacle.y}px`;
-        document.body.appendChild(obsElement);
-    });
-
-    // Função para verificar colisão em uma direção específica
-    function willCollide(newX, newY) {
-        for (let obstacle of obstacles) {
-            if (
-                newX < obstacle.x + obstacle.width &&
-                newX + square.clientWidth > obstacle.x &&
-                newY < obstacle.y + obstacle.height &&
-                newY + square.clientHeight > obstacle.y
-            ) {
-                message.style.left = `${obstacle.x + obstacle.width / 2}px`;
-                message.style.top = `${obstacle.y - 30}px`;
-                message.style.display = 'block';
-                nearObstacle = true;
-                return true; // Há uma colisão
-            }
-        }
-        message.style.display = 'none';
-        nearObstacle = false;
-        return false; // Não há colisão
-    }
-
-    // script.js
-
-// script.js
-
-document.addEventListener('keydown', (event) => {
-    if (event.key === 'f' || event.key === 'F') {
-        const textbox = document.getElementById('textbox');
-        
-        // Alterna a visibilidade da caixa de texto
-        if (textbox.style.display === 'none' || textbox.style.display === '') {
-            textbox.style.display = 'block';
-        } else {
-            textbox.style.display = 'none';
-        }
-    }
-});
-
-
-
-    // Movimento do quadrado
-    window.addEventListener('keydown', (e) => {
-        let newX = posX;
-        let newY = posY;
-
-        switch (e.key) {
-            case 'w':
-            case 'W':
-                newY = Math.max(posY - step, -5); // Tenta mover para cima
-                break;
-            case 's':
-            case 'S':
-                newY = Math.min(posY + step,700, window.innerHeight - square.clientHeight ); // Tenta mover para baixo
-                break;
-            case 'a':
-            case 'A':
-                newX = Math.max(posX - step, -5); // Tenta mover para a esquerda
-                break;
-            case 'd':
-            case 'D':
-                newX = Math.min(posX + step, window.innerWidth - square.clientWidth, 4000); // Tenta mover para a direita
-                break;
-            case 'f':
-            case 'F':
-                if (nearObstacle) {
-                    // Redireciona para outra sala (página)
-                    window.location.replace.src='./outra_sala.html';
-                }
-                break;
-        }
-
-        // Verifica colisão antes de atualizar a posição
-        if (!willCollide(newX, newY)) {
-            posX = newX;
-            posY = newY;
-            square.style.left = `${posX}px`;
-            square.style.top = `${posY}px`;
-        }
-    });
-</script>
-
+    <script src="./script.js/script.js"></script>
 </body>
+
 </html>
