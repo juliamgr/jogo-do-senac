@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quadrado Móvel</title>
+    <style>
+        * {
+            cursor: url('png-clipart-club-penguin-island-flathead-grey-mullet-fish-dead-fish-game-animals.png'), auto;
+        }
+
+        .tia {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            top: 40%;
+            right: 200px;
+        }
+
+        .entrada {
+            display: block;
+            height: 100%;
+            width: 4%;
+            background-color: rgb(202, 188, 159);
+            position: relative;
+            padding-top: 50%;
+            margin-right: 20px;
+        }
+
+        .door {
+            position: absolute;
+            width: 40px;
+            height: 28%;
+            background-color: rgb(32, 14, 3);
+            top: 50%;
+            left: 65%;
+            transform: translate(-50%, -50%);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-image: url('https://i.pinimg.com/564x/20/76/73/207673d5352a495fcfb62e1b4bb81e5c.jpg');
+            background-color: #937d7d;
+        }
+
+        .armario2 {
+            display: block;
+            float: left;
+            height: 20%;
+            width: 18%;
+            margin-top: 0%;
+        }
+
+        #square {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #square img {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="Canva" width="100" height="100" style="background-color: red;"></canvas> <!-- Tamanho da tela -->
+
+<canvas id="gameCanvas" width="80" height="60"></canvas>
+<div id="square">
+    <img id="square-gif" src="./dimiparado.png" width="70" alt="Personagem">
+</div>
+
+<img class="tia" src="tiaartic.png" alt="Tia">
+
+<script>
+    const square = document.getElementById('square');
+    const squareGif = document.getElementById('square-gif');
+    const tia = document.querySelector('.tia'); // Elemento Tia
+    const ctx = document.getElementById('Canva').getContext('2d');
+
+    let posX = square.offsetLeft;  // Posição inicial do personagem
+    let posY = square.offsetTop;   // Posição inicial do personagem
+    const step = 15;               // Quantidade de movimento em pixels
+    const width = square.offsetWidth;  // Largura do quadrado
+    const height = square.offsetHeight; // Altura do quadrado
+    let gifAtivo = false;  // Controle do gif (ativo ou parado)
+
+    // Variável para armazenar se as teclas estão pressionadas
+    let movingKeys = {
+        w: false,
+        a: false,
+        s: false,
+        d: false
+    };
+
+    // Função que verifica a colisão entre o personagem e a Tia
+    function verificarColisao() {
+        const rectPersonagem = square.getBoundingClientRect();
+        const rectTia = tia.getBoundingClientRect();
+
+        // Verifica se o personagem colidiu com a "tia"
+        return !(rectPersonagem.right <= rectTia.left || 
+                 rectPersonagem.left >= rectTia.right || 
+                 rectPersonagem.bottom <= rectTia.top || 
+                 rectPersonagem.top >= rectTia.bottom);
+    }
+
+    // Função para mover o personagem
+    function moverPersonagem() {
+        // Verifica se as teclas estão pressionadas e move o personagem
+        if (movingKeys.w && !verificarColisao()) {
+            posY = Math.max(posY - step, -210);  // Limite superior
+            gifAtivo = true;
+            squareGif.src = './dimi de costa (1).gif';
+        }
+        if (movingKeys.s && !verificarColisao()) {
+            posY = Math.min(posY + step, window.innerHeight - height, 200);  // Limite inferior
+            gifAtivo = true;
+            squareGif.src = './didmitrinho (1).gif';
+        }
+        if (movingKeys.a && !verificarColisao()) {
+            posX = Math.max(posX - step, -620);  // Limite esquerdo
+            squareGif.src = './dimi esq.gif';
+            square.style.transform = `translate(${posX}px, ${posY}px) rotateY(180deg)`;
+            gifAtivo = true;
+        }
+        if (movingKeys.d && !verificarColisao()) {
+            posX = Math.min(posX + step, window.innerWidth - width, 500);  // Limite direito
+            squareGif.src = './dimi dir.gif';
+            square.style.transform = `translate(${posX}px, ${posY}px) rotateY(0deg)`;
+            gifAtivo = true;
+        }
+
+        // Atualiza a posição do quadrado
+        square.style.transform = `translate(${posX}px, ${posY}px)`;
+    }
+
+    // Detecta quando uma tecla é pressionada
+    window.addEventListener('keydown', (e) => {
+        if (['w', 'a', 's', 'd'].includes(e.key)) {
+            movingKeys[e.key] = true;
+            moverPersonagem();
+        }
+    });
+
+    // Detecta quando uma tecla é liberada
+    window.addEventListener('keyup', (e) => {
+        if (['w', 'a', 's', 'd'].includes(e.key)) {
+            movingKeys[e.key] = false;
+        }
+
+        // Se nenhuma tecla de movimento for pressionada, o gif será parado
+        if (!Object.values(movingKeys).includes(true)) {
+            gifAtivo = false;
+            squareGif.src = './dimiparado.png'; // Coloca a imagem estática quando o gif não está em movimento
+        }
+    });
+
+</script>
+
+</body>
+</html>

@@ -11,15 +11,19 @@
                 <IMG  class="armario2" src="armario2.avif">
                     <IMG  class="armario2" src="armario2.avif">
                         <IMG  class="armario2" src="armario2.avif">
+                            <IMG  class="lixo" src="LIXEIRA-AZUL-50L-SEM-POSTE-JSN (1).png">
                             
                         
     </div>
+    <div class="julia paia"></div>
     <div class="julia paia"></div>
    
     <div class="entrada">
         <div class="door"></div>
        
     </div>
+    <img class="tia" src="tiaartic.png">
+    
     
 
    
@@ -31,15 +35,30 @@
             *{
                 cursor: url('png-clipart-club-penguin-island-flathead-grey-mullet-fish-dead-fish-game-animals.png'),auto;
             }
+   .lixo{
+        display: block;
+        float: left;
+        
+        height: 15%;
+        width: 10%;
+       margin-top:-9%;
+       margin-left:87%;
 
+}
 
-          
+          .tia{
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            top:40%;
+            right: 200px;
+          }
         .entrada{
             display:block;
            
             height: 100%;
             width: 4%;
-            background-color: rgb(235, 235, 239);
+            background-color: rgb(202, 188, 159);
             position: relative;
              padding-top:50%;
             margin-right: 20px;
@@ -49,7 +68,7 @@
             position: absolute;
             width: 40px; /* Largura do quadrado */
             height: 28%; /* Altura do quadrado */
-            background-color: rgb(32, 14, 3); /* Cor marrom */
+            background-color: rgb(75, 43, 24); /* Cor marrom */
             top: 50%;
             left: 65%;
             transform: translate(-50%, -50%);
@@ -105,8 +124,9 @@
     const square = document.getElementById('square');
     const squareGif = document.getElementById('square-gif');
     const ctx = canvas.getContext('2d');
+    const tia = document.querySelector('.tia'); 
 
-    let posX = canvas.width / 15- 100; // Posição inicial do personagem (centrado)
+    let posX = canvas.width / 1- 100; // Posição inicial do personagem (centrado)
     let posY = canvas.height / 15 - 100; // Posição inicial do personagem (centrado)
     const step = 15; // Quantidade de movimento em pixels
     const width = square.offsetWidth;  // Largura do quadrado
@@ -121,6 +141,17 @@
         d: false
     };
 
+    function verificarColisao() {
+        const rectPersonagem = square.getBoundingClientRect();
+        const rectTia = tia.getBoundingClientRect();
+
+        // Verifica se o personagem colidiu com a "tia"
+        return !(rectPersonagem.right <= rectTia.left || 
+                 rectPersonagem.left >= rectTia.right || 
+                 rectPersonagem.bottom <= rectTia.top || 
+                 rectPersonagem.top >= rectTia.bottom);
+    }
+
     // Definindo limites personalizados para a área de movimento
     const maxX = canvas.width * 9;  // Limite direito aumentado (2x a largura do canvas)
     const maxY = canvas.height * 5; // Limite inferior aumentado (2x a altura do canvas)
@@ -128,33 +159,35 @@
     // Função para atualizar a posição do personagem e o gif
     function moverPersonagem() {
         // Verifica se as teclas estão pressionadas e move o personagem
-        if (movingKeys.w) {
+        if (movingKeys.w && !verificarColisao()) {
             posY = Math.max(posY - step, -210);  // Limite superior
             gifAtivo = true;
-            squareGif.src = './dimi de costa (1).gif'; 
+            squareGif.src = './dimi de costa (1).gif';
         }
-        if (movingKeys.s) {
-            posY = Math.min(posY + step,  maxY - height,200 );  // Limite inferior aumentado
+        if (movingKeys.s && !verificarColisao()) {
+            posY = Math.min(posY + step, window.innerHeight - height, 200);  // Limite inferior
             gifAtivo = true;
-            squareGif.src = './didmitrinho (1).gif'; 
+            squareGif.src = './didmitrinho (1).gif';
         }
-        if (movingKeys.a) {
+        if (movingKeys.a && !verificarColisao()) {
             posX = Math.max(posX - step, -620);  // Limite esquerdo
-            squareGif.src = './dimi esq.gif'; 
-            square.style.transform = `translate(${posX}px, ${posY}px) rotateY(180deg)`; 
+            squareGif.src = './dimi esq.gif';
+            square.style.transform = `translate(${posX}px, ${posY}px) rotateY(180deg)`;
             gifAtivo = true;
         }
-        if (movingKeys.d) {
-            posX = Math.min(posX + step, maxX - width, 500);  // Limite direito aumentado
-            squareGif.src = './dimi dir.gif'; 
-            square.style.transform = `translate(${posX}px, ${posY}px) rotateY(0deg)`; 
+        if (movingKeys.d && !verificarColisao()) {
+            posX = Math.min(posX + step, window.innerWidth - width, 500);  // Limite direito
+            squareGif.src = './dimi dir.gif';
+            square.style.transform = `translate(${posX}px, ${posY}px) rotateY(0deg)`;
             gifAtivo = true;
         }
-
         // Atualiza a posição do quadrado na tela
         square.style.transform = `translate(${posX}px, ${posY}px)`; 
+       
     }
+    
 
+  
     // Detecta quando uma tecla é pressionada
     window.addEventListener('keydown', (e) => {
         if (['w', 'a', 's', 'd'].includes(e.key)) {
@@ -203,15 +236,8 @@ function checkCollision(mouseX, mouseY) {
     return false;
 }
 
-// Função para iniciar a interação (pressionando a tecla "F")
-function startInteraction() {
-    isInteracting = !isInteracting; // Alterna o estado de interação
-    if (isInteracting) {
-        alert("Interação iniciada! Clique no quadrado.");
-    } else {
-        alert("Interação encerrada.");
-    }
-}
+
+
 
 // Evento de pressionamento de tecla (para iniciar interação com a tecla F)
 document.addEventListener('keydown', function(event) {
