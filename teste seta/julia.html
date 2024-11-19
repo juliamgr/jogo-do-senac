@@ -15,8 +15,10 @@
                             
                         
     </div>
-    <div class="julia paia"></div>
-    <div class="julia paia"></div>
+    <div class="julia paia">
+        <img class="jolia" src="julia tristona.png">
+    </div>
+    
    
     <div class="entrada">
         <div class="door"></div>
@@ -45,6 +47,13 @@
        margin-left:87%;
 
 }
+.jolia{
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            top:80%;
+            right: 85%;
+          }
 
           .tia{
             position: absolute;
@@ -142,49 +151,66 @@
     };
 
     function verificarColisao() {
-        const rectPersonagem = square.getBoundingClientRect();
-        const rectTia = tia.getBoundingClientRect();
+    const rectPersonagem = square.getBoundingClientRect();
+    const rectTia = tia.getBoundingClientRect();
 
-        // Verifica se o personagem colidiu com a "tia"
-        return !(rectPersonagem.right <= rectTia.left || 
-                 rectPersonagem.left >= rectTia.right || 
-                 rectPersonagem.bottom <= rectTia.top || 
-                 rectPersonagem.top >= rectTia.bottom);
+    // Verifica se o personagem colidiu com a "tia"
+    return !(rectPersonagem.right <= rectTia.left || 
+             rectPersonagem.left >= rectTia.right || 
+             rectPersonagem.bottom <= rectTia.top || 
+             rectPersonagem.top >= rectTia.bottom);
+}
+
+function moverPersonagem() {
+    // Verifica se as teclas estão pressionadas e move o personagem
+    if (movingKeys.w) {
+        // Permite o movimento para cima sem bloquear completamente (não importa a colisão)
+        posY = Math.max(posY - step, -210);  // Limite superior
+        squareGif.src = './dimi de costa (1).gif';
+    }
+    if (movingKeys.s) {
+        // Permite o movimento para baixo sem bloquear completamente
+        posY = Math.min(posY + step, window.innerHeight - height, 200);  // Limite inferior
+        squareGif.src = './didmitrinho (1).gif';
+    }
+    if (movingKeys.a) {
+        // Permite o movimento para a esquerda sem bloquear completamente
+        posX = Math.max(posX - step, -620);  // Limite esquerdo
+        squareGif.src = './dimi esq.gif';
+        square.style.transform = `translate(${posX}px, ${posY}px) rotateY(180deg)`;
+    }
+    if (movingKeys.d) {
+        // Permite o movimento para a direita sem bloquear completamente
+        posX = Math.min(posX + step, window.innerWidth - width, 500);  // Limite direito
+        squareGif.src = './dimi dir.gif';
+        square.style.transform = `translate(${posX}px, ${posY}px) rotateY(0deg)`;
     }
 
-    // Definindo limites personalizados para a área de movimento
-    const maxX = canvas.width * 9;  // Limite direito aumentado (2x a largura do canvas)
-    const maxY = canvas.height * 5; // Limite inferior aumentado (2x a altura do canvas)
+    // Verifica se o personagem está colidindo com a tia e ajusta a posição
+    if (verificarColisao()) {
+        // Caso haja colisão, move o personagem para fora da colisão (evita que ele fique "preso").
+        // Por exemplo, se a colisão ocorrer na direção 'a' (esquerda), mova o personagem para a direita;
+        // caso contrário, move para a esquerda.
+        if (movingKeys.a) {
+            posX = Math.min(posX + step, window.innerWidth - width); // Mover para direita caso tenha colidido
+        }
+        if (movingKeys.d) {
+            posX = Math.max(posX - step, -620); // Mover para esquerda caso tenha colidido
+        }
+        if (movingKeys.w) {
+            posY = Math.min(posY + step, window.innerHeight - height); // Mover para baixo caso tenha colidido
+        }
+        if (movingKeys.s) {
+            posY = Math.max(posY - step, -210); // Mover para cima caso tenha colidido
+        }
+    }
 
-    // Função para atualizar a posição do personagem e o gif
-    function moverPersonagem() {
-        // Verifica se as teclas estão pressionadas e move o personagem
-        if (movingKeys.w && !verificarColisao()) {
-            posY = Math.max(posY - step, -210);  // Limite superior
-            gifAtivo = true;
-            squareGif.src = './dimi de costa (1).gif';
-        }
-        if (movingKeys.s && !verificarColisao()) {
-            posY = Math.min(posY + step, window.innerHeight - height, 200);  // Limite inferior
-            gifAtivo = true;
-            squareGif.src = './didmitrinho (1).gif';
-        }
-        if (movingKeys.a && !verificarColisao()) {
-            posX = Math.max(posX - step, -620);  // Limite esquerdo
-            squareGif.src = './dimi esq.gif';
-            square.style.transform = `translate(${posX}px, ${posY}px) rotateY(180deg)`;
-            gifAtivo = true;
-        }
-        if (movingKeys.d && !verificarColisao()) {
-            posX = Math.min(posX + step, window.innerWidth - width, 500);  // Limite direito
-            squareGif.src = './dimi dir.gif';
-            square.style.transform = `translate(${posX}px, ${posY}px) rotateY(0deg)`;
-            gifAtivo = true;
-        }
-        // Atualiza a posição do quadrado na tela
-        square.style.transform = `translate(${posX}px, ${posY}px)`; 
+    // Atualiza a posição do quadrado na tela
+    square.style.transform = `translate(${posX}px, ${posY}px)`;
+}
+
        
-    }
+    
     
 
   
