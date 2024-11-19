@@ -1,23 +1,71 @@
-*{
-    box-sizing: border-box;
-}
-
 body{
-    padding: 0;
-    margin: 0;
-    overflow: hidden;
-    background-color: #333;
+    background-image: url(https://i.pinimg.com/564x/7d/1c/54/7d1c547e966595ed9e98f4b6d55b61f8.jpg);
 }
 
-.game-container{
-    position: relative;
-    width: 352px;
-    height: 198px;
-    outline: 1px solid white;
-    margin: 0 auto;
-    margin-top: 20px;
-    
+#square {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
+
+.mesa1{
+    display: block;
+    background-color: red;
+    width: 70px;
+    height: 70px;
+    margin-left: 407px;
+    margin-top: 180px;
+}
+
+.mesa2{
+    display: block;
+    background-color: red;
+    width: 70px;
+    height: 70px;
+    margin-left: 407px;
+    margin-top: 180px;
+}
+
+.mesa3{
+    display: block;
+    background-color: red;
+    width: 70px;
+    height: 70px;
+    margin-left: 407px;
+    margin-top: 180px;
+}
+
+.mesa4{
+    display: block;
+    background-color: red;
+    width: 70px;
+    height: 70px;
+    margin-left: 407px;
+    margin-top: 180px;
+}
+
+.mesa5{
+    display: block;
+    background-color: red;
+    width: 70px;
+    height: 70px;
+    margin-left: 407px;
+    margin-top: 180px;
+}
+
+.mesa6{
+    display: block;
+    background-color: red;
+    width: 70px;
+    height: 70px;
+    margin-left: 407px;
+    margin-top: 180px;
+}
+
+
 
 
 
