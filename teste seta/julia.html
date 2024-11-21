@@ -15,6 +15,9 @@
                             
                         
     </div>
+    <divc class="visoria">
+        <img  class="vioria"src="https://pbs.twimg.com/media/FcWB7VXXEAAmuk7?format=jpg&name=large">
+    </divc>
     <div class="julia paia">
         <img class="jolia" src="julia tristona.png">
     </div>
@@ -47,12 +50,20 @@
        margin-left:87%;
 
 }
+.vioria{
+    position: absolute;
+            width: 120px;
+            height: 120px;
+            top:40%;
+            right: 70%;
+
+}
 .jolia{
             position: absolute;
-            width: 150px;
-            height: 150px;
-            top:80%;
-            right: 85%;
+            width: 120px;
+            height: 120px;
+            top:85%;
+            right: 88%;
           }
 
           .tia{
@@ -134,9 +145,11 @@
     const squareGif = document.getElementById('square-gif');
     const ctx = canvas.getContext('2d');
     const tia = document.querySelector('.tia'); 
+    const jolia = document.querySelector('.jolia'); 
+    const vioria = document.querySelector('.vioria'); 
 
-    let posX = canvas.width / 1- 100; // Posição inicial do personagem (centrado)
-    let posY = canvas.height / 15 - 100; // Posição inicial do personagem (centrado)
+    let posX = canvas.width / 1- 100; 
+    let posY = canvas.height / 15 - 100;
     const step = 15; // Quantidade de movimento em pixels
     const width = square.offsetWidth;  // Largura do quadrado
     const height = square.offsetHeight; // Altura do quadrado
@@ -153,13 +166,36 @@
     function verificarColisao() {
     const rectPersonagem = square.getBoundingClientRect();
     const rectTia = tia.getBoundingClientRect();
+    const rectJolia = jolia.getBoundingClientRect();
+    const rectvioria = vioria.getBoundingClientRect();
 
-    // Verifica se o personagem colidiu com a "tia"
-    return !(rectPersonagem.right <= rectTia.left || 
-             rectPersonagem.left >= rectTia.right || 
-             rectPersonagem.bottom <= rectTia.top || 
-             rectPersonagem.top >= rectTia.bottom);
+    
+    const colisaoTia = !(rectPersonagem.right <= rectTia.left || 
+                        rectPersonagem.left >= rectTia.right || 
+                        rectPersonagem.bottom <= rectTia.top || 
+                        rectPersonagem.top >= rectTia.bottom);
+                        
+                        
+
+    
+    const colisaoJolia = !(rectPersonagem.right <= rectJolia.left || 
+                          rectPersonagem.left >= rectJolia.right || 
+                          rectPersonagem.bottom <= rectJolia.top || 
+                          rectPersonagem.top >= rectJolia.bottom);
+
+  const colisaovioria= !(rectPersonagem.right <= rectvioria.left || 
+                        rectPersonagem.left >= rectvioria.right || 
+                        rectPersonagem.bottom <= rectvioria.top || 
+                        rectPersonagem.top >= rectvioria.bottom);
+                        
+    
+    return colisaoTia || colisaoJolia ||colisaovioria;
 }
+
+
+
+
+
 
 function moverPersonagem() {
     // Verifica se as teclas estão pressionadas e move o personagem
