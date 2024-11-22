@@ -221,7 +221,7 @@ function moverPersonagem() {
     }
     if (movingKeys.d) {
         // Permite o movimento para a direita sem bloquear completamente
-        posX = Math.min(posX + step, window.innerWidth - width, 500);  // Limite direito
+        posX = Math.min(posX + step, window.innerWidth - width, 590);  // Limite direito
         squareGif.src = './dimi dir.gif';
         square.style.transform = `translate(${posX}px, ${posY}px) rotateY(0deg)`;
     }
@@ -232,13 +232,13 @@ function moverPersonagem() {
         // Por exemplo, se a colisão ocorrer na direção 'a' (esquerda), mova o personagem para a direita;
         // caso contrário, move para a esquerda.
         if (movingKeys.a) {
-            posX = Math.min(posX + step, window.innerWidth - width); // Mover para direita caso tenha colidido
+            posX = Math.min(posX + step, window.innerWidth - width, 200); // Mover para direita caso tenha colidido
         }
         if (movingKeys.d) {
             posX = Math.max(posX - step, -620); // Mover para esquerda caso tenha colidido
         }
         if (movingKeys.w) {
-            posY = Math.min(posY + step, window.innerHeight - height); // Mover para baixo caso tenha colidido
+            posY = Math.min(posY + step, 200, window.innerHeight - height); // Mover para baixo caso tenha colidido
         }
         if (movingKeys.s) {
             posY = Math.max(posY - step, -210); // Mover para cima caso tenha colidido
