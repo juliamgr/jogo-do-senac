@@ -13,7 +13,6 @@ body{
 
 .mesa1{
     display: block;
-    background-color: red;
     width: 110px;
     height: 70px;
     margin-left: 407px;
@@ -22,7 +21,6 @@ body{
 
 .mesa2{
     display: block;
-    background-color: red;
     width: 110px;
     height: 70px;
     margin-left: 800px;
@@ -31,7 +29,6 @@ body{
 
 .mesa3{
     display: block;
-    background-color: red;
     width: 110px;
     height: 70px;
     margin-left: 407px;
@@ -41,7 +38,6 @@ body{
 
 .mesa4{
     display: block;
-    background-color: red;
     width: 110px;
     height: 70px;
     margin-left: 800px;
@@ -50,7 +46,6 @@ body{
 
 .mesa5{
     display: block;
-    background-color: red;
     width: 110px;
     height: 70px;
     margin-left: 407px;
@@ -59,25 +54,60 @@ body{
 
 .mesa6{
     display: block;
-    background-color: red;
     width: 110px;
     height: 70px;
     margin-left: 800px;
     margin-top: -70px;
 }
 
+.mesa7{
+    display: block;
+    width: 110px;
+    height: 70px;
+    margin-left: 55px;
+    margin-top: -370px;
+    background-color: red;
+}
+
+.mesa8{
+    display: block;
+    width: 110px;
+    height: 70px;
+    margin-left: 55px;
+    margin-top: 80px;
+    background-color: red;
+}
+
+.mesa9{
+    display: block;
+    width: 110px;
+    height: 70px;
+    margin-left: 55px;
+    margin-top: 80px;
+    background-color: red;
+}
+
+.mesa10{
+    display: block;
+    width: 110px;
+    height: 70px;
+    margin-top: -370px;
+    margin-left: 1000px;
+    background-color: red;
+}
+
+.mesa11{
+    display: block;
+    width: 110px;
+    height: 70px;
+    margin-top: 200px;
+    margin-left: 1000px;
+}
+
 .mesaProf{
     display: block;
-    background-color: red;
     width: 205px;
     height: 85px;
     margin-left: 1131px;
-    margin-top: -489px;
+    margin-top: -390px;
 }
-
-
-
-
-
-
-
