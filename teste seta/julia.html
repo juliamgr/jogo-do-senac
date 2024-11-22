@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+    
     <div class="armario">
         
         <IMG  class="armario2" src="armario2.avif">
@@ -13,8 +14,14 @@
                         <IMG  class="armario2" src="armario2.avif">
                             <IMG  class="lixo" src="LIXEIRA-AZUL-50L-SEM-POSTE-JSN (1).png">
                             
-                        
+                    
     </div>
+    <div id="botao-interacao">Pressione F para Interagir</div>
+<div id="textbox">
+    <h1></h1>
+   
+    
+</div>
     <div class="visoria">
         <img  class="vioria" src="vitoria anitter.png" width="120px" alt="">
     </div>
@@ -131,6 +138,30 @@
         #square img {
             width: 100%;
             height: 100%;
+        }
+
+
+        #botao-interacao {
+            display: none;
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        #textbox {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            background-color: #fff;
+            padding: 20px;
+            transform: translate(-50%, -50%);
+            border: 2px solid #000;
+            width: 300px;
+            height: 200px;
+            text-align: center;
         }
     </style>
 </head>
@@ -305,22 +336,8 @@ function checkCollision(mouseX, mouseY) {
 
 
 
-// Evento de pressionamento de tecla (para iniciar interação com a tecla F)
-document.addEventListener('keydown', function(event) {
-    if (event.key === 'f' || event.key === 'F') {
-        startInteraction(); // Inicia ou interrompe a interação
-    }
-});
 
 // Evento de clique do mouse para verificar colisão com o quadrado
-canvas.addEventListener('click', function(event) {
-    const mouseX = event.offsetX;
-    const mouseY = event.offsetY;
-
-    if (checkCollision(mouseX, mouseY) && isInteracting) {
-        alert("Você clicou no quadrado e iniciou uma interação!");
-    }
-});
 
 // Atualizar o canvas
 function updateCanvas() {
