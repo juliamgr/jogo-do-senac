@@ -16,9 +16,13 @@
 </head>
 <body>
     <div class="textbox" >
-        <H1 class="name">  Senaczada</H1>
+        <H1 class="texto">Olá você deve ser o aluno novo, Dimitri não é mesmo?</H1>
+        <H1 class="name">  Tia Artic</H1>
+        
         <img id="fototia" src="https://m.media-amazon.com/images/I/41F35zLfl-L._AC_.jpg">
-        <H1 class="texto">oioioi</H1>
+        <button onclick="mudarTexto()">Próximo</button>
+       
+       
         
     </div>
 
@@ -28,13 +32,21 @@
 </html>
 
 <style>
-   
+   button {
+    display: block;
+          float: top;
+           margin-left: 90%;
+            
+            
+        }
 .texto{
     display: block;
-    margin-top:10px;
-    margin-right: 30%;
+    position: absolute;
+    padding-left: 27%;
+   margin-top: 5%;
     font-family: "Gloria Hallelujah", cursive;
-font-weight: 400;
+    font-size: medium;
+font-weight: 200;
 font-style: normal;
 
 }
@@ -80,3 +92,28 @@ font-style: normal;*/
          }
          
 </style>
+<script>
+const textos = [
+            "Este é o texto original.",
+            "O texto foi alterado para o primeiro!",
+            "Agora o texto mudou para o segundo!",
+            "E este é o terceiro texto."
+        ];
+
+         // Variável para controlar o índice do texto atual
+         let indiceTexto = 0;
+
+// Função para mudar o texto
+function mudarTexto() {
+    // Atualiza o texto do parágrafo com base no índice
+    document.getElementById("texto").innerHTML = textos[indiceTexto];
+    
+    // Incrementa o índice para o próximo texto
+    indiceTexto++;
+
+    // Se o índice for maior ou igual ao número de textos, volta ao início
+    if (indiceTexto >= textos.length) {
+        indiceTexto = 0;
+    }
+}
+    </script>
