@@ -4,13 +4,181 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="teste.js"></script>
-    <link rel="stylesheet" href="teste.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Danfo&family=Gloria+Hallelujah&family=Londrina+Sketch&family=Rubik+Wet+Paint&display=swap" rel="stylesheet">
+    <style>
+        .botao {
+            font-family: "Patrick Hand SC", cursive;
+            color: rgb(181, 126, 160);
+            position: fixed;
+            bottom: 40px;
+            right: 20%;
+            background-color: #0f0787;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: large;
+            cursor: pointer;
+        }
+
+        .texto {
+            display: block;
+            position: absolute;
+            padding-left: 27%;
+            margin-top: 5%;
+            font-family: "Gloria Hallelujah", cursive;
+            font-size: medium;
+            font-weight: 200;
+            font-style: normal;
+        }
+
+        .textbox {
+            position: fixed;
+            display: block;
+            margin-top: 25%;
+            height: 200px;
+            width: 850px;
+            margin-left: 15%;
+            background-color: rgb(87, 94, 190);
+            border-color: rgb(144, 102, 80);
+            border: 7px;
+            border-style: solid;
+        }
+
+        .name {
+            position: fixed;
+            font-family: "Patrick Hand SC", cursive;
+            font-weight: 400;
+            font-style: normal;
+            margin-left: 30%;
+            margin-top: 1%;
+        }
+
+        #fototia {
+            background-color: rgb(122, 122, 177);
+            border-style: outset;
+            display: block;
+            width: 200px;
+            height: 180px;
+            margin-top: 10px;
+            margin-left: 10px;
+        }
+
+        #perguntas {
+            text-align: center;
+            display: none;
+             padding-left: 27%;
+            margin-top: 5%;
+        }
+
+        .resposta {
+            padding-left: 27%;
+            margin-top: 5%;
+            display: block;
+           
+            background-color: #4CAF50;
+            color: white;
+            font-size: large;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .resposta:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
-    <div id="square"> 
-        <img src="dimitri.png" width="70px" alt="">   
+    <div class="textbox">
+        <H1 class="texto">BAZINGA!!!</H1>
+        <H1 class="name">Xeldom</H1>
+        <img id="fototia" src="https://static.wikia.nocookie.net/characterprofile/images/9/99/Sheldon_Cooper-e2c45f57-a437-43eb-9bab-7079acf5077f.png/revision/latest/scale-to-width-down/672?cb=20230108055228">
+        <button class="botao" onclick="mudarTexto()">Próximo</button>
+
+        <!-- Perguntas -->
+        <div id="perguntas">
+            <h2 id="pergunta-texto"></h2>
+            <button class="resposta" onclick="verificarResposta(true)">Opção 1</button>
+            <button class="resposta" onclick="verificarResposta(false)">Opção 2</button>
+            <button class="resposta" onclick="verificarResposta(false)">Opção 3</button>
+        </div>
     </div>
-     
+
+    <script>
+        const textos = [
+            "OLÁ VOCÊ DEVE SER O ALUNO NOVO NÃO É MESMO?",
+            "Vamos começar com sua primeira prova já que está atrasado!"
+           
+        ];
+
+        // Variável para controlar o índice do texto atual
+        let indiceTexto = 0;
+
+        function mudarTexto() {
+            document.querySelector('.texto').textContent = textos[indiceTexto];
+
+            // Incrementa o índice para o próximo texto
+            indiceTexto++;
+
+            // Se o índice for maior ou igual ao número de textos, começa o sistema de perguntas
+            if (indiceTexto >= textos.length) {
+                // Esconde o botão e exibe as perguntas
+                document.querySelector('.botao').style.display = "none";
+                mostrarPergunta();
+            }
+        }
+
+        const perguntas = [
+            {
+                pergunta: "Qual é a capital da França?",
+                opcoes: ["Paris", "Londres", "Berlim"],
+                respostaCorreta: 0, // Índice da opção correta
+                paginaErro: "erro.html" // Página de erro em caso de resposta incorreta
+            },
+            {
+                pergunta: "Quanto é 2 + 2?",
+                opcoes: ["4", "5", "3"],
+                respostaCorreta: 0,
+                paginaErro: "erro.html"
+            }
+        ];
+
+        let perguntaAtual = 0;
+
+        function mostrarPergunta() {
+            // Esconde o texto atual
+            document.querySelector('.texto').style.display = "none";
+
+            const pergunta = perguntas[perguntaAtual];
+            document.getElementById("pergunta-texto").textContent = pergunta.pergunta;
+
+            // Definir as opções
+            const botoes = document.querySelectorAll('.resposta');
+            for (let i = 0; i < botoes.length; i++) {
+                botoes[i].textContent = pergunta.opcoes[i];
+                botoes[i].disabled = false;
+            }
+
+            // Exibe a seção de perguntas
+            document.getElementById("perguntas").style.display = "block";
+        }
+
+        function verificarResposta(correta) {
+            const pergunta = perguntas[perguntaAtual];
+            if (correta) {
+                alert("Resposta correta!");
+                perguntaAtual++;
+                if (perguntaAtual < perguntas.length) {
+                    mostrarPergunta();
+                } else {
+                    alert("Parabéns, você completou todas as perguntas!");
+                }
+            } else {
+                window.location.href = pergunta.paginaErro; // Redireciona para a página de erro
+            }
+        }
+    </script>
 </body>
 </html>
