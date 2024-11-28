@@ -1,27 +1,57 @@
-const square = document.getElementById('square');
-    const squareGif = document.getElementById('square-gif');
+const square = document.getElementById("square");
+const mesas = document.querySelectorAll(".mesa");
+const message = document.getElementById("message");
 
-function moverPersonagem() {
-    // Verifica se as teclas estão pressionadas e move o personagem
-    if (movingKeys.w) {
-        // Permite o movimento para cima sem bloquear completamente (não importa a colisão)
-        posY = Math.max(posY - step, -210);  // Limite superior
-        squareGif.src = './dimi de costa (1).gif';
+let posX = window.innerWidth / 2 - 35; // Posição inicial X
+let posY = window.innerHeight / 2 - 35; // Posição inicial Y
+const step = 10; // Velocidade de movimento
+
+function moveSquare(newX, newY) {
+    // Limitar movimento dentro dos limites da janela
+    newX = Math.max(-300, Math.min(newX, window.innerWidth - square.offsetWidth));
+    newY = Math.max(-400, Math.min(newY, window.innerHeight - square.offsetHeight));
+
+    // Verificar colisão com obstáculos
+    const collided = Array.from(mesas).some((mesa) => {
+        const mesaRect = mesa.getBoundingClientRect();
+        return (
+            newX < mesaRect.right &&
+            newX + square.offsetWidth > mesaRect.left &&
+            newY < mesaRect.bottom &&
+            newY + square.offsetHeight > mesaRect.top
+        );
+    });
+
+    if (collided) {
+        message.style.display = "block";
+        setTimeout(() => (message.style.display = "none"), 1000);
+        return; // Impede o movimento se houver colisão
     }
-    if (movingKeys.s) {
-        // Permite o movimento para baixo sem bloquear completamente
-        posY = Math.min(posY + step, window.innerHeight - height, 200);  // Limite inferior
-        squareGif.src = './didmitrinho (1).gif';
+
+    // Atualizar posição
+    posX = newX;
+    posY = newY;
+    square.style.transform = `translate(${posX}px, ${posY}px)`;
+}
+
+window.addEventListener("keydown", (e) => {
+    let newX = posX;
+    let newY = posY;
+
+    switch (e.key.toLowerCase()) {
+        case "w": // Para cima
+            newY -= step;
+            break;
+        case "s": // Para baixo
+            newY += step;
+            break;
+        case "a": // Para a esquerda
+            newX -= step;
+            break;
+        case "d": // Para a direita
+            newX += step;
+            break;
     }
-    if (movingKeys.a) {
-        // Permite o movimento para a esquerda sem bloquear completamente
-        posX = Math.max(posX - step, -620);  // Limite esquerdo
-        squareGif.src = './dimi esq.gif';
-        square.style.transform = `translate(${posX}px, ${posY}px) rotateY(180deg)`;
-    }
-    if (movingKeys.d) {
-        // Permite o movimento para a direita sem bloquear completamente
-        posX = Math.min(posX + step, window.innerWidth - width, 500);  // Limite direito
-        squareGif.src = './dimi dir.gif';
-        square.style.transform = `translate(${posX}px, ${posY}px) rotateY(0deg)`;
-    }}
+
+    moveSquare(newX, newY);
+});

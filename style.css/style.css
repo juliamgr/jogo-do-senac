@@ -4,18 +4,48 @@ body{
 
 #square {
     position: absolute;
-    width: 100px;
-    height: 100px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    width: 70px; /* largura do quadrado */
+    height: 70px; /* altura do quadrado */
+    /* cor do quadrado */
+    top: 50%; /* posição inicial */
+    left: 50%; /* posição inicial */
+    transform: translate(-50%, -50%); /* centraliza o quadrado */
 }
+
+#message {
+    position: absolute;
+    justify-content: center;
+    display: none;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
+}
+
+#textbox {
+display: block;
+padding: 70px;
+background-color: #333;
+color: #fff;
+border-radius: 5px;
+font-size: 18px;
+text-align: center;
+margin-top: 480px;
+}
+
+.hidden {
+display: none;
+}
+
+
+/*------------------------------------------------------------------------------------------------------*/
 
 .mesa1{
     display: block;
     width: 110px;
     height: 70px;
-    margin-left: 407px;
+    margin-left: 542px;
     margin-top: 180px;
 }
 
@@ -31,7 +61,7 @@ body{
     display: block;
     width: 110px;
     height: 70px;
-    margin-left: 407px;
+    margin-left: 542px;
     margin-top: 80px;
     
 }
@@ -48,7 +78,7 @@ body{
     display: block;
     width: 110px;
     height: 70px;
-    margin-left: 407px;
+    margin-left: 542px;
     margin-top: 80px;
 }
 
@@ -64,27 +94,24 @@ body{
     display: block;
     width: 110px;
     height: 70px;
-    margin-left: 55px;
+    margin-left: 285px;
     margin-top: -370px;
-    background-color: red;
 }
 
 .mesa8{
     display: block;
     width: 110px;
     height: 70px;
-    margin-left: 55px;
+    margin-left: 285px;
     margin-top: 80px;
-    background-color: red;
 }
 
 .mesa9{
     display: block;
     width: 110px;
     height: 70px;
-    margin-left: 55px;
+    margin-left: 285px;
     margin-top: 80px;
-    background-color: red;
 }
 
 .mesa10{
@@ -92,16 +119,23 @@ body{
     width: 110px;
     height: 70px;
     margin-top: -370px;
-    margin-left: 1000px;
-    background-color: red;
+    margin-left: 1047px;
 }
 
 .mesa11{
     display: block;
     width: 110px;
     height: 70px;
-    margin-top: 200px;
-    margin-left: 1000px;
+    margin-top: 80px;
+    margin-left: 1047px;
+}
+
+.mesa12{
+    display: block;
+    width: 110px;
+    height: 70px;
+    margin-top: 80px;
+    margin-left: 1047px;
 }
 
 .mesaProf{
@@ -109,5 +143,5 @@ body{
     width: 205px;
     height: 85px;
     margin-left: 1131px;
-    margin-top: -390px;
+    margin-top: -526px;
 }
