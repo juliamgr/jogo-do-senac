@@ -259,12 +259,15 @@ function moverPersonagem() {
         // Permite o movimento para a esquerda sem bloquear completamente
         posX = Math.max(posX - step, -620);  // Limite esquerdo
         squareGif.src = './dimi esq.gif';
+        squareGif.classList.remove("oitudobem");
+        squareGif.classList.add("helllomoto");
         square.style.transform = `translate(${posX}px, ${posY}px) rotateY(180deg)`;
     }
     if (movingKeys.d) {
         // Permite o movimento para a direita sem bloquear completamente
         posX = Math.min(posX + step, window.innerWidth - width, 590);  // Limite direito
         squareGif.src = './dimi dir.gif';
+        squareGif.classList.add("oitudobem");
         square.style.transform = `translate(${posX}px, ${posY}px) rotateY(0deg)`;
     }
 
