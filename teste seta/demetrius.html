@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -5,62 +6,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quadrado Móvel</title>
     <div id="square"><img src="./dimitri.png" width="150px" alt=""></div>
+    <button id="actionButton" style="position: absolute; display: none; top: 40%; left: 95%; transform: translateX(-50%); padding: 10px 20px; background-color: #642e2e; color: white; border: none; border-radius: 3px; cursor: pointer;">(F) Entrar</button>
     <style>
         body {
-            
-            margin: 1px ;
+            margin: 1px;
             overflow: hidden;
             background-size: cover;
-            background-image: url(farrapos.png) ;
+            background-image: url(farrapada.png);
             background-color: #937d7d;
         }
         #square {
             position: absolute;
             width: 70px; /* largura do quadrado */
             height: 70px; /* altura do quadrado */ 
-            /* cor do quadrado */
             top: 50%; /* posição inicial */
             left: 50%; /* posição inicial */
             transform: translate(-50%, -50%); /* centraliza o quadrado */
-        }
-        canvas {
-            border: 1px solid black;
-            display: block;
-            margin: auto;
-            background-color: #f0f0f0;
         }
     </style>
 </head>
 <body>
 
-
-
 <script>
     const square = document.getElementById('square');
-    let posX = window.innerWidth /  -2; // posição inicial
-    let posY = window.innerHeight /  -10; // posição inicial
-    const step = 13; // quantidade de movimento
+    const actionButton = document.getElementById('actionButton');
+    let posX = window.innerWidth / 5 - 35; // posição inicial correta (centro)
+    let posY = window.innerHeight / 2 - 35; // posição inicial correta (centro)
+    const step = 20; // quantidade de movimento
 
     // Atualiza a posição inicial do quadrado
-    square.style.transform = `translate(${posX}px, ${posY}px)`;
+    square.style.left = `${posX}px`;
+    square.style.top = `${posY}px`;
 
     window.addEventListener('keydown', (e) => {
         switch (e.key) {
             case 'w':
-                posY = Math.max(posY - step, ); // limite superior
+                posY = Math.max(posY - step, 200); // limite superior
                 break;
             case 's':
-                posY = Math.min(posY + step, window.innerHeight - square.clientHeight); // limite inferior
+                posY = Math.min(posY + step, window.innerHeight - 20 ); // limite inferior
                 break;
             case 'a':
-                posX = Math.max(posX - step, ); // limite esquerdo
+                posX = Math.max(posX - step, 100); // limite esquerdo
                 break;
             case 'd':
-                posX = Math.min(posX + step, window.innerWidth - square.clientWidth); // limite direito
+                posX = Math.min(posX + step, window.innerWidth - 70); // limite direito
+                break;
+            case 'f':
+                // Se a tecla F for pressionada, ativa o botão
+                if (actionButton.style.display === 'block') {
+                    window.location.href = 'julia.html'; // Substitua pelo link desejado
+                }
                 break;
         }
+
         // Atualiza a posição do quadrado
-        square.style.transform = `translate(${posX}px, ${posY}px)`;
+        square.style.left = `${posX}px`;
+        square.style.top = `${posY}px`;
+
+       
+        if (posY < 270) { 
+            actionButton.style.display = 'block'; // Exibe o botão
+         if (posX < 290) 
+            actionButton.style.display = 'block'; // Exibe o botão
+        
+        } else {
+            actionButton.style.display = 'none'; // Oculta o botão
+        }
     });
 </script>
 
