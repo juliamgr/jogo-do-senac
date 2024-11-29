@@ -20,7 +20,7 @@
 <div id="textbox">
     <h1></h1>
    
-    
+    <button id="open-button" class="hidden">Falar</button>
 </div>
     <div class="visoria">
         <img  class="vioria" src="vitoria anitter.png" width="300" height="200" />
@@ -98,7 +98,7 @@
           }
         .entrada{
             display:block;
-           background-image: url('wall.png') ;
+         
             height: 100%;
             width: 4%;
             background-color: rgb(84, 47, 37);
@@ -152,7 +152,7 @@
             height: 100%;
         }
 
-
+ 
         #botao-interacao {
             display: none;
             position: absolute;
@@ -161,7 +161,19 @@
             padding: 10px 20px;
             cursor: pointer;
         }
-
+ #open-button {
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: none;
+      background-color: green;
+      padding: 10px;
+      color: white;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+    }
         #textbox {
             display: none;
             position: absolute;
@@ -194,6 +206,7 @@
     const tia = document.querySelector('.tia'); 
     const jolia = document.querySelector('.jolia'); 
     const vioria = document.querySelector('.vioria'); 
+    const openButton = document.getElementById("open-button");
 
     let posX = canvas.width / -2; 
     let posY = canvas.height / -30;
@@ -260,15 +273,15 @@ function moverPersonagem() {
         // Permite o movimento para a esquerda sem bloquear completamente
         posX = Math.max(posX - step, -620);  // Limite esquerdo
         squareGif.src = './dimi esq.gif';
-        squareGif.classList.remove("oitudobem");
-        squareGif.classList.add("helllomoto");
+//squareGif.classList.remove("oitudobem");
+        //squareGif.classList.add("helllomoto");
         square.style.transform = `translate(${posX}px, ${posY}px) rotateY(180deg)`;
     }
     if (movingKeys.d) {
         // Permite o movimento para a direita sem bloquear completamente
         posX = Math.min(posX + step, window.innerWidth - width, 590);  // Limite direito
         squareGif.src = './dimi dir.gif';
-        squareGif.classList.add("oitudobem");
+        //squareGif.classList.add("oitudobem");
         square.style.transform = `translate(${posX}px, ${posY}px) rotateY(0deg)`;
     }
 
@@ -334,10 +347,8 @@ function moverPersonagem() {
 
 
 
-    function drawSquare() {
-    ctx.clearRect(  canvas.width, canvas.height); // Limpar o canvas
-    ctx.drawImage(img, square.x, square.y, square.width, square.height); // Desenhar a imagem no quadrado
-}
+   
+
 
 // Checar colisão com o mouse
 function checkCollision(mouseX, mouseY) {
