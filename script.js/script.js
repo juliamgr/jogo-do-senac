@@ -2,23 +2,33 @@ const square = document.getElementById("square");
 const mesas = document.querySelectorAll(".mesa");
 const message = document.getElementById("message");
 
-let posX = window.innerWidth / 2 - 35; // Posição inicial X
-let posY = window.innerHeight / 2 - 35; // Posição inicial Y
+let posX = -2; // Posição inicial X
+let posY = 4; // Posição inicial Y
 const step = 10; // Velocidade de movimento
 
 function moveSquare(newX, newY) {
     // Limitar movimento dentro dos limites da janela
-    newX = Math.max(-300, Math.min(newX, window.innerWidth - square.offsetWidth));
-    newY = Math.max(-400, Math.min(newY, window.innerHeight - square.offsetHeight));
+    const maxX = window.innerWidth - square.offsetWidth;
+    const maxY = window.innerHeight - square.offsetHeight;
+
+    newX = Math.max(-690, Math.min(newX, maxX)); // Limite horizontal
+    newY = Math.max(-380, Math.min(newY, maxY)); // Limite vertical
 
     // Verificar colisão com obstáculos
     const collided = Array.from(mesas).some((mesa) => {
         const mesaRect = mesa.getBoundingClientRect();
+        const squareRect = {
+            left: newX,
+            right: newX + square.offsetWidth,
+            top: newY,
+            bottom: newY + square.offsetHeight,
+        };
+
         return (
-            newX < mesaRect.right &&
-            newX + square.offsetWidth > mesaRect.left &&
-            newY < mesaRect.bottom &&
-            newY + square.offsetHeight > mesaRect.top
+            squareRect.right > mesaRect.left &&
+            squareRect.left < mesaRect.right &&
+            squareRect.bottom > mesaRect.top &&
+            squareRect.top < mesaRect.bottom
         );
     });
 
