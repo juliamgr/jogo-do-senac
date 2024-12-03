@@ -14,35 +14,23 @@ body{
 
 .obstacle {
     position: absolute;
+    width: 50px;
+    height: 50px;
     background-color: red;
+    top: 20%;
+    left: 70%;
+    transform: translate(-50%, -50%);
 }
 
-#message {
-    position: absolute;
-    justify-content: center;
-    display: none;
+button, input {
+    margin-top: 20px;
     padding: 10px;
-    background-color: #333;
-    color: #fff;
-    border-radius: 5px;
-    font-family: Arial, sans-serif;
-}
-
-#textbox {
-display: block;
-padding: 70px;
-background-color: #333;
-color: #fff;
-border-radius: 5px;
-font-size: 18px;
-text-align: center;
-margin-top: 480px;
+    font-size: 16px;
 }
 
 .hidden {
 display: none;
 }
-
 
 /*------------------------------------------------------------------------------------------------------*/
 

@@ -1,11 +1,35 @@
-const square = document.getElementById("square");
-const mesas = document.querySelectorAll(".mesa");
-const message = document.getElementById("message");
-const obstacles = [
-    { x: 100, y: 150, width: 50, height: 50 },
-    { x: 300, y: 400, width: 80, height: 80 },
-    { x: 600, y: 200, width: 100, height: 100 }
-];
+const square = document.getElementById('square');
+const obstacle = document.getElementById('obstacle');
+const pressFButton = document.getElementById('press-f-button');
+const textbox = document.getElementById('textbox');
+
+// Function to calculate distance between two elements
+function getDistance(el1, el2) {
+    const rect1 = el1.getBoundingClientRect();
+    const rect2 = el2.getBoundingClientRect();
+    const dx = rect1.left - rect2.left;
+    const dy = rect1.top - rect2.top;
+    return Math.sqrt(dx * dx + dy * dy);
+}
+
+
+
+    // Check distance and show button if close
+    const distance = getDistance(square, obstacle);
+    if (distance < 100) {
+        pressFButton.hidden = false;
+    } else {
+        pressFButton.hidden = true;
+    }
+;
+
+// Event listener for 'F' key press
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'f' && !pressFButton.hidden) {
+        textbox.hidden = false;
+        textbox.focus();
+    }
+});
 
 obstacles.forEach(obstacle => {
     const obsElement = document.createElement('div');
@@ -98,10 +122,7 @@ window.addEventListener("keydown", (e) => {
             newX += step;
             break;
 
-    if (nearObstacle) {
-        // Redireciona para outra sala (página)
-        window.location.href = "https://www.google.com/search?sca_esv=a30db985f4ecea9c&rlz=1C1GCEU_pt-BRBR1104BR1104&q=plano+cartesiano&udm=2&fbs=AEQNm0AuaLfhdrtx2b9ODfK0pnmi046uB92frSWoVskpBryHTvXAcQd7vp80ISgpQqOrJlJ1fF0j5Y1X9xOSWf9RFNq36qeXngBUAhftFlUjvTHg_muA-Q7gPVPDf_lyeHHawAjqwTi5qLG5_7DhDGNGzdX84VOyOfljsUBsn14kikNN0DtIQ2JKW_1HcJZ9c4cjGCLj2fSwJuNEYpHrC5-WhUOHGbR0YA&sa=X&ved=2ahUKEwi14uKpsIGKAxUvDrkGHQoYDG4QtKgLegQIGxAB&biw=1366&bih=641&dpr=1#vhid=vr3T5izeBplGHM&vssid=mosaic"; 
-    }}
+    }
 
     moveSquare(newX, newY);
 });
