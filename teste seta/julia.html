@@ -28,7 +28,12 @@
     <div class="julia paia">
         <img class="jolia" src="julia tristona.png">
     </div>
-    
+    <div id="elemento" class="elemento">
+                
+        <!-- Trigger/Open The Modal -->
+        <button id="myBtn">Open Modal</button>
+        <button id="botao" class="botao" style="display: none;">Clique Aqui</button>
+      </div>
    
     <div class="entrada" img src="wall.png">
         
@@ -174,6 +179,27 @@
       border: none;
       cursor: pointer;
     }
+    .elemento {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  background-color: #3498db;
+  border-radius: 10px;
+}
+
+.botao {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px;
+  background-color: #2ecc71;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: none;
+}
+
         #textbox {
             display: none;
             position: absolute;
@@ -187,6 +213,46 @@
             height: 200px;
             text-align: center;
         }
+
+        
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
     </style>
 </head>
 <body>
@@ -198,6 +264,30 @@
     <img id="square-gif" src="./dimiparado.png" width="70" alt="Personagem">
 </div>
 
+<!-- The Modal -->
+<div id="modalPers1" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p>Some text in the Modal..</p>
+    </div>
+</div>
+<div id="modalPers2" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p>Some text in the Modal..</p>
+    </div>
+</div>
+<div id="modalPers3" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p>Some text in the Modal..</p>
+    </div>
+</div>
+
+
 <script>
     const canvas = document.getElementById('Canva');
     const square = document.getElementById('square');
@@ -207,6 +297,46 @@
     const jolia = document.querySelector('.jolia'); 
     const vioria = document.querySelector('.vioria'); 
     const openButton = document.getElementById("open-button");
+    const elemento = document.getElementById('elemento');
+const botao = document.getElementById('botao');
+
+
+  function verificarProximidade() {
+  const posSquare = square.getBoundingClientRect();
+  const posElemento = tia.getBoundingClientRect();
+
+let distancia = posElemento.x-posSquare.x;
+  console.log(distancia);
+  if ( distancia < 150) {
+    botao.style.display = 'block';
+    console.log('colidiu');
+  } else {
+    botao.style.display = 'none';
+    console.log('ainda nao');
+  }
+}
+  
+document.addEventListener('keydown', function(e) {
+  const step = 5; // A cada tecla pressionada, o personagem se move 5px
+
+  if (e.key === 'ArrowUp') {
+    personagem.style.top = (parseInt(personagem.style.top || 0) - step) + 'px';
+  } else if (e.key === 'ArrowDown') {
+    personagem.style.top = (parseInt(personagem.style.top || 0) + step) + 'px';
+  } else if (e.key === 'ArrowLeft') {
+    personagem.style.left = (parseInt(personagem.style.left || 0) - step) + 'px';
+  } else if (e.key === 'ArrowRight') {
+    personagem.style.left = (parseInt(personagem.style.left || 0) + step) + 'px';
+  }
+
+  // Verifica a proximidade após o movimento
+  verificarProximidade();
+});
+
+// Verifica a proximidade inicialmente
+verificarProximidade();
+
+
 
     let posX = canvas.width / -2; 
     let posY = canvas.height / -30;
@@ -346,9 +476,31 @@ function moverPersonagem() {
     draw();
 
 
+// Get the modal
+var modalPers1 = document.getElementById("modalPers1");
 
-   
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
 
+// Get the <span> element that  '' closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+    modalPers1.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modalPers1.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modalPers1) {
+    modalPers1.style.display = "none";
+  }
+}
 
 // Checar colisão com o mouse
 function checkCollision(mouseX, mouseY) {
@@ -375,7 +527,9 @@ img.onload = function() {
     updateCanvas(); // Inicia o loop de animação quando a imagem carregar
 }
 
+
 </script>
+
 
 </body>
 </html>
