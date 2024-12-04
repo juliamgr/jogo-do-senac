@@ -3,8 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Danfo&family=Gloria+Hallelujah&family=Londrina+Sketch&family=Rubik+Wet+Paint&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Danfo&family=Gloria+Hallelujah&family=Londrina+Sketch&family=Patrick+Hand+SC&family=Rubik+Wet+Paint&display=swap" rel="stylesheet">
+
+<div class="textbox" >
+    <H1 class="texto">Olá você deve ser o aluno novo, Demetrios não é mesmo?</H1>
+    <H1 class="name">  Tia Artic</H1>
     
+    <img id="fototia" src="https://m.media-amazon.com/images/I/41F35zLfl-L._AC_.jpg">
+    <button class="btn" onclick="mudarTexto()">Próximo</button>
+   
+   
     
+</div>
     <div class="armario">
         
         <IMG  class="armario2" src="lockeruou.png">
@@ -31,8 +46,8 @@
     <div id="elemento" class="elemento">
                 
         <!-- Trigger/Open The Modal -->
-        <button id="myBtn">Open Modal</button>
-        <button id="botao" class="botao" style="display: none;">Clique Aqui</button>
+        
+        <button id="botao" class="botao" style="display: none;">Interagir</button>
       </div>
    
     <div class="entrada" img src="wall.png">
@@ -180,10 +195,12 @@
       cursor: pointer;
     }
     .elemento {
+    
   position: relative;
   width: 200px;
   height: 200px;
-  background-color: #3498db;
+  margin-left:73%;
+
   border-radius: 10px;
 }
 
@@ -232,7 +249,7 @@
 
 /* Modal Content */
 .modal-content {
-  background-color: #fefefe;
+  background-color: #3aabb4;
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
@@ -253,6 +270,75 @@
   text-decoration: none;
   cursor: pointer;
 }
+
+
+.btn {
+    font-family: "Patrick Hand SC", cursive;
+    color: rgb(90, 154, 90);
+    position: fixed; /* Fix the position */
+    bottom: 40px;    /* Space from the bottom of the screen */
+    right: 20%;     /* Space from the right side of the screen */
+    
+    background-color: #4CAF50; /* Green background */
+    color: white; /* Text color */
+    border: none;
+    border-radius: 10px;
+    font-size: large;
+    cursor: pointer;
+            
+            
+        }
+.texto{
+    display: block;
+    position: absolute;
+    padding-left: 27%;
+   margin-top: 5%;
+    font-family: "Gloria Hallelujah", cursive;
+    font-size: medium;
+font-weight: 200;
+font-style: normal;
+
+}
+
+
+    .textbox{
+        position: fixed;
+        
+        display: block;
+        margin-top: 25%;
+        /*font-family: "Gloria Hallelujah", cursive;
+font-weight: 400;
+font-style: normal;*/
+
+  
+
+        height: 200px;
+        width: 850px;margin-left: 15%;
+        background-color: rgb(162, 225, 123);
+        border-color: rgb(144, 102, 80); 
+        border:7px;
+        border-style: solid ;  
+         }
+
+         .name{
+            position: fixed;
+            font-family: "Patrick Hand SC", cursive;
+  font-weight: 400;
+  font-style: normal;
+  margin-left:30%;  
+  margin-top:1%;
+
+         }
+         
+
+         #fototia{
+            border-style: outset;
+        display: block;
+            width: 200px;
+            height: 180px;
+            margin-top: 10px;
+            margin-left: 10px;
+         }
     </style>
 </head>
 <body>
@@ -340,7 +426,7 @@ verificarProximidade();
 
     let posX = canvas.width / -2; 
     let posY = canvas.height / -30;
-    const step = 15; // Quantidade de movimento em pixels
+    const step = 15; //
     const width = square.offsetWidth;  // Largura do quadrado
     const height = square.offsetHeight; // Altura do quadrado
     let gifAtivo = false; // Controle para saber se o gif está animado ou não
@@ -388,9 +474,9 @@ verificarProximidade();
 
 
 function moverPersonagem() {
-    // Verifica se as teclas estão pressionadas e move o personagem
+    
     if (movingKeys.w) {
-        // Permite o movimento para cima sem bloquear completamente (não importa a colisão)
+       
         posY = Math.max(posY - step, -210);  // Limite superior
         squareGif.src = './dimi de costa (1).gif';
     }
@@ -403,23 +489,20 @@ function moverPersonagem() {
         // Permite o movimento para a esquerda sem bloquear completamente
         posX = Math.max(posX - step, -620);  // Limite esquerdo
         squareGif.src = './dimi esq.gif';
-//squareGif.classList.remove("oitudobem");
-        //squareGif.classList.add("helllomoto");
+
         square.style.transform = `translate(${posX}px, ${posY}px) rotateY(180deg)`;
     }
     if (movingKeys.d) {
-        // Permite o movimento para a direita sem bloquear completamente
+       
         posX = Math.min(posX + step, window.innerWidth - width, 590);  // Limite direito
         squareGif.src = './dimi dir.gif';
         //squareGif.classList.add("oitudobem");
         square.style.transform = `translate(${posX}px, ${posY}px) rotateY(0deg)`;
     }
 
-    // Verifica se o personagem está colidindo com a tia e ajusta a posição
+    
     if (verificarColisao()) {
-        // Caso haja colisão, move o personagem para fora da colisão (evita que ele fique "preso").
-        // Por exemplo, se a colisão ocorrer na direção 'a' (esquerda), mova o personagem para a direita;
-        // caso contrário, move para a esquerda.
+        
         if (movingKeys.a) {
             posX = Math.min(posX + step, window.innerWidth - width, 200); // Mover para direita caso tenha colidido
         }
@@ -434,7 +517,7 @@ function moverPersonagem() {
         }
     }
 
-    // Atualiza a posição do quadrado na tela
+    
     square.style.transform = `translate(${posX}px, ${posY}px)`;
 }
 
@@ -467,12 +550,11 @@ function moverPersonagem() {
     // Função para desenhar o canvas (opcional, você pode adicionar outras coisas no canvas)
     function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height); // Limpa o canvas
-        // Desenha o personagem no canvas (apenas exemplo, não será necessário com o div "square" controlando a posição)
-        // ctx.fillRect(posX, posY, 70, 70); // Desenha o quadrado (personagem)
+        
         requestAnimationFrame(draw); // Redesenha o canvas
     }
 
-    // Inicia o desenho contínuo (opcional, se quiser adicionar outras coisas no canvas)
+    
     draw();
 
 
@@ -480,7 +562,7 @@ function moverPersonagem() {
 var modalPers1 = document.getElementById("modalPers1");
 
 // Get the button that opens the modal
-var btn = document.getElementById("myBtn");
+var btn = document.getElementById("botao");
 
 // Get the <span> element that  '' closes the modal
 var span = document.getElementsByClassName("close")[0];
@@ -515,16 +597,14 @@ function checkCollision(mouseX, mouseY) {
 
 
 
-// Evento de clique do mouse para verificar colisão com o quadrado
 
-// Atualizar o canvas
 function updateCanvas() {
     drawSquare(); // Desenha o quadrado (com a imagem)
     requestAnimationFrame(updateCanvas); // Faz o loop de animação
 }
 
 img.onload = function() {
-    updateCanvas(); // Inicia o loop de animação quando a imagem carregar
+    updateCanvas(); 
 }
 
 
