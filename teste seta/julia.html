@@ -32,7 +32,7 @@
     <button id="open-button" class="hidden">Falar</button>
 </div>
     <div class="visoria">
-        <img  class="vioria" src="vitoria anitter.png" width="300" height="200" />
+        <img  class="vioria" src="vitoria anitter.png" width="300px" height="200px"  />
     </div>
     <div class="julia paia">
         <img class="jolia" src="julia tristona.png">
@@ -73,6 +73,7 @@
 
 }
 .vioria{
+    background-color: blue;
     position: absolute;
           overflow: hidden;
            height: 150px;
@@ -86,7 +87,7 @@
 }
 .visoria {
             position: absolute;
-           
+           background-color: red;
             overflow: hidden;
             height: 210px; /* altura da área visível */
             width: 100px;  /* largura da área visível */
@@ -153,17 +154,23 @@
         }
 
         #square {
+            align-items: center;
+            display: block;
+            background-color: green;
+            padding-right: 1px;
+            padding-left:  ;
             position: absolute;
-            width: 100px;
-            height: 100px;
+            width: 50px;
+            height: 50px;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
+           right: 10%;
         }
 
         #square img {
-            width: 100%;
-            height: 100%;
+            left: 15%;
+            width: 98px;
+            height: 100px;
         }
 
  
@@ -270,7 +277,7 @@
     font-family: "Patrick Hand SC", cursive;
     color: rgb(90, 154, 90);
     position: fixed; /* Fix the position */
-    bottom: 40px;    /* Space from the bottom of the screen */
+    bottom: 12%;    /* Space from the bottom of the screen */
     right: 20%;     /* Space from the right side of the screen */
     
     background-color: #4CAF50; /* Green background */
@@ -299,7 +306,7 @@ font-style: normal;
         position: fixed;
         
         display: block;
-        margin-top: 25%;
+        margin-top: 15%;
         /*font-family: "Gloria Hallelujah", cursive;
 font-weight: 400;
 font-style: normal;*/
@@ -341,7 +348,7 @@ font-style: normal;*/
 
 <canvas id="gameCanvas" width="80" height="60"></canvas>
 <div id="square">
-    <img id="square-gif" src="./dimiparado.png" width="70" alt="Personagem">
+    <img id="square-gif" src="./dimiparado.png" width="50%" >
 </div>
 
 <!-- The Modal -->
@@ -354,7 +361,7 @@ font-style: normal;*/
     <button class="btn" onclick="mudarTexto()">Próximo</button>
     <div class=>
       <span class="close">&times;</span>
-      <p>Somethe Modal..</p>
+      
     </div>
 </div>
 <div id="modalPers2" class="modal">
@@ -418,6 +425,34 @@ document.addEventListener('keydown', function(e) {
   verificarProximidade();
 });
 
+const textos = [
+            "Já vi que você ja conheceu alguns dos nossos alunos!",
+            "Eu sou a Tia Artic, professora da escola, e vou te ajudar neste processo de começar em uma escola nova!",
+            "Bom nosso colégio funciona por um sistema de diversas matérias, e você precisa passar em todas elas para passar de ano, mas se você não passar nas provas voltará para a FARRAPOS!!, e terá que fazer tudo novamente.",
+            "Mas não se preocupe pois você ainda pode ser divertir e se distrair durante este processo de ano letivo.",
+            "Muitos dos nossos alunos são muito legais e adoram conhecer novas pessoas, você vai adorar eles, estão sempre deixando coisas pela escola, talvez uma hora você encontre algo deles.",
+"Qualquer coisa que precisar é só perguntar que vou tentar ajudar do modo que puder!"
+        ];
+
+         // Variável para controlar o índice do texto atual
+         let indiceTexto = 0;
+
+         function mudarTexto() {
+            document.querySelector('.texto').textContent = "Bem-vindo, Dimitri! Vamos começar o aprendizado.";
+        }
+// Função para mudar o texto
+function mudarTexto() {
+    // Atualiza o texto do elemento com a classe .texto com o texto atual do array
+    document.querySelector('.texto').textContent = textos[indiceTexto];
+    
+    // Incrementa o índice para o próximo texto
+    indiceTexto++;
+
+    // Se o índice for maior ou igual ao número de textos, volta ao início
+    if (indiceTexto >= textos.length) {
+        indiceTexto = 0;
+    }
+}
 // Verifica a proximidade inicialmente
 verificarProximidade();
 
