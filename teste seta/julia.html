@@ -11,7 +11,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Danfo&family=Gloria+Hallelujah&family=Londrina+Sketch&family=Patrick+Hand+SC&family=Rubik+Wet+Paint&display=swap" rel="stylesheet">
 
 
-   
+   <div class="saida1">
+
+   </div>
     
 </div>
     <div class="armario">
@@ -70,6 +72,14 @@
         width: 10%;
        margin-top:-9%;
        margin-left:87%;
+
+}
+#saida1{
+    background-color: brown;
+    width: 100px;
+    height: 100px;
+display: block;
+padding-left: 2%;
 
 }
 .vioria{
@@ -396,6 +406,8 @@ const botao = document.getElementById('botao');
   function verificarProximidade() {
   const posSquare = square.getBoundingClientRect();
   const posElemento = tia.getBoundingClientRect();
+  const posElemento2 = jolia.getBoundingClientRect();
+  
 
 let distancia = posElemento.x-posSquare.x;
   console.log(distancia);
