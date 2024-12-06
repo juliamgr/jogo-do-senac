@@ -37,13 +37,14 @@
    
     <button id="open-button" class="hidden">Falar</button>
 </div>
-    <div class="visoria">
+   <!-- <div class="visoria">-->
         <img  class="vioria" src="anita_lora__1_-removebg-preview.png" width="300px" height="200px"  />
     </div>
     <div class="julia paia">
         <img class="jolia" src="julia tristona.png">
     </div>
     <div class="saida1"></div>
+    <div class="saida2"></div>
     <div id="elemento" class="elemento">
                 
         <!-- Trigger/Open The Modal -->
@@ -60,7 +61,7 @@
     <img class="tia" src="tiaartic.png">
     
     
-
+    <canvas id="Canva" width="1" height="1"></canvas> <!-- Tamanho da tela -->
    
     
         
@@ -70,9 +71,8 @@
 </head>
 <body>
 
-<canvas id="Canva" width="100" height="100" style="background-color: red;"></canvas> <!-- Tamanho da tela -->
 
-<canvas id="gameCanvas" width="80" height="60"></canvas>
+
 <div id="square">
     <img id="square-gif" src="./dimiparado.png" width="50%" >
 </div>
@@ -258,7 +258,7 @@ function moverPersonagem() {
     }
     if (movingKeys.d) {
        
-        posX = Math.min(posX + step, window.innerWidth - width, 600);  // Limite direito
+        posX = Math.min(posX + step, window.innerWidth - width, 510);  // Limite direito
         squareGif.src = './dimi dir.gif';
         //squareGif.classList.add("oitudobem");
         square.style.transform = `translate(${posX}px, ${posY}px) rotateY(0deg)`;

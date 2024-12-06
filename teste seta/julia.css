@@ -15,14 +15,27 @@ margin-left:87%;
 .saida1{
    display: block;
 
-height: 100%;
+height: 60%;
 width: 6%;
+background-image: url(texturewall.png);
 background-color: blue;
 position: absolute;
- padding-bottom: 20px;
+ padding-top: 20px;
 margin-left: 95%;
 
 }
+.saida2{
+    display: block;
+ 
+ height: 60%;
+ width: 6%;
+ background-image: url(texturewall.png);
+ background-color: blue;
+ position: absolute;
+margin-top: 39%;
+ margin-left: 95%;
+ 
+ }
 
 
 
@@ -67,7 +80,7 @@ right: 200px;
 }
 .entrada{
 display:block;
-
+background-image: url("texturewall.png");
 height: 100%;
 width: 4%;
 background-color: rgb(84, 47, 37);
@@ -294,4 +307,3 @@ height: 180px;
 margin-top: 10px;
 margin-left: 10px;
 }
-</style>
