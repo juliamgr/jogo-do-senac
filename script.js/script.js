@@ -2,9 +2,9 @@ const square = document.getElementById("square");
         const message = document.getElementById("message");
 
         const obstacles = [
-            { x: 100, y: 150, width: 110, height: 70 },
-            { x: 300, y: 400, width: 110, height: 70 },
-            { x: 600, y: 200, width: 110, height: 70 }
+            { x: 863, y: 215, width: 110, height: 70 },
+            { x: 863, y: 365, width: 110, height: 70 },
+            { x: 1110, y: 215, width: 110, height: 70 }
         ];
 
         obstacles.forEach(obstacle => {
@@ -28,7 +28,7 @@ const square = document.getElementById("square");
                     message.style.left = `${obstacle.x + obstacle.width / 2}px`;
                     message.style.top = `${obstacle.y - 30}px`;
                     message.style.display = 'block';
-                    return true; // Há uma colisão
+                    return true;
                 }
             }
             message.style.display = 'none';
