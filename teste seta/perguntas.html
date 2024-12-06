@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionário</title>
+    <style>
+       @keyframes color {
+          0%   { background: #33CCCC; }
+          20%  { background: #33CC36; }
+          40%  { background: #B8CC33; }
+          60%  { background: #FCCA00; }
+          80%  { background: #33CC36; }
+          100% { background: #33CCCC; }
+      }
+
+      h1 {
+          text-align: center;
+          font-family: 'Kavoon', sans-serif;
+          font-size: 2.5em;
+          color: white;
+      }
+
+      body {
+          font-family: Arial, sans-serif;
+          margin: 20px;
+          background: #33CCCC; /* Fallback */
+          animation: color 9s infinite linear;
+          padding: 2em;
+      }
+
+      .conteudo {
+          display: none;
+      }
+
+      .resposta-correta {
+          color: green;
+      }
+
+      .resposta-errada {
+          color: red;
+      }
+
+      h1 {
+          font-family: "Comic Neue", cursive;
+          font-weight: 700;
+          font-style: italic;
+          text-align: center;
+      }
+
+      h2 {
+          font-family: "Comic Neue", cursive;
+          text-align: center;
+      }
+
+      /* Aplicando borda nas perguntas com borda menor nas laterais */
+      #borda {
+          border: 3px solid black; /* Borda de 3px, cor preta */
+          padding: 20px 10px; /* 20px nas partes superior e inferior, 10px nas laterais */
+          margin: 20px 0; /* Espaçamento acima e abaixo */
+          border-radius: 10px; /* Bordas arredondadas */
+          background-color: #fff; /* Cor de fundo para contraste */
+      }
+
+      form {
+          font-size: 20px;
+          text-align: center;
+          font-family: "Comic Neue", cursive;
+      }
+
+    </style>
+</head>
+<body>
+    <h1>Questionário de Perguntas</h1>
+    
+    <div id="pergunta1" class="pergunta">
+        <div id="borda">
+            <h2>1. Qual é a capital da França?</h2>
+            <form>
+                <label><input type="radio" name="resposta1" value="errado1"> Roma</label><br>
+                <label><input type="radio" name="resposta1" value="correto"> Paris</label><br>
+                <label><input type="radio" name="resposta1" value="errado2"> Londres</label><br>
+                <label><input type="radio" name="resposta1" value="errado3"> Berlim</label><br>
+                <button type="button" onclick="verificarResposta(1)">Enviar</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="pergunta2" class="pergunta conteudo">
+        <div id="borda">
+            <h2>2. Qual é a capital do Japão?</h2>
+            <form>
+                <label><input type="radio" name="resposta2" value="errado1"> Pequim</label><br>
+                <label><input type="radio" name="resposta2" value="correto"> Tóquio</label><br>
+                <label><input type="radio" name="resposta2" value="errado2"> Seul</label><br>
+                <label><input type="radio" name="resposta2" value="errado3"> Bangcoc</label><br>
+                <button type="button" onclick="verificarResposta(2)">Enviar</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="pergunta3" class="pergunta conteudo">
+        <div id="borda">
+            <h2>3. Qual é a capital do Brasil?</h2>
+            <form>
+                <label><input type="radio" name="resposta3" value="errado1"> São Paulo</label><br>
+                <label><input type="radio" name="resposta3" value="correto"> Brasília</label><br>
+                <label><input type="radio" name="resposta3" value="errado2"> Rio de Janeiro</label><br>
+                <label><input type="radio" name="resposta3" value="errado3"> Salvador</label><br>
+                <button type="button" onclick="verificarResposta(3)">Enviar</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="resposta-correta" class="conteudo">
+        <h2 class="resposta-correta">Parabéns, você acertou!</h2>
+        <p>A resposta está correta. Você vai para a próxima pergunta.</p>
+    </div>
+
+    <div id="resposta-errada" class="conteudo">
+        <h2 class="resposta-errada">Resposta Errada!</h2>
+        <p>A resposta que você escolheu está incorreta. Você será redirecionado para outra página.</p>
+    </div>
+
+    <script>
+        function verificarResposta(pergunta) {
+            const respostas = document.getElementsByName(`resposta${pergunta}`);
+            let selecionada;
+
+            for (let i = 0; i < respostas.length; i++) {
+                if (respostas[i].checked) {
+                    selecionada = respostas[i].value;
+                    break;
+                }
+            }
+
+            
+            document.getElementById(`pergunta${pergunta}`).style.display = "none";
+
+        
+            if (selecionada === "correto") {
+                document.getElementById("resposta-correta").style.display = "block";
+                setTimeout(() => {
+                    document.getElementById("resposta-correta").style.display = "none";
+                    
+                    if (pergunta < 3) {
+                        document.getElementById(`pergunta${pergunta + 1}`).style.display = "block";
+                    } else {
+                        
+                        alert("Você completou o questionário!");
+                    }
+                }, 2000); 
+            } else {
+              
+                window.location.href = "demetrius.html";
+            }
+        }
+    </script>
+</body>
+</html>
